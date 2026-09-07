@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CropMandi AI - Farm Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Roboto+Slab:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#722000",
+                        "surface-container-low": "#f4f4f0",
+                        "primary-fixed-dim": "#8bd6b6",
+                        "surface-container-highest": "#e3e2df",
+                        "on-background": "#1b1c1a",
+                        "on-surface-variant": "#3f4944",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dbdad6",
+                        "surface-tint": "#1b6b51",
+                        "on-primary-fixed-variant": "#00513b",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#a6f2d1",
+                        "on-tertiary-fixed": "#390c00",
+                        "on-primary-fixed": "#002116",
+                        "on-secondary-container": "#6f5100",
+                        "secondary-fixed-dim": "#f9bd22",
+                        "inverse-on-surface": "#f2f1ed",
+                        "on-tertiary-fixed-variant": "#832600",
+                        "primary": "#004532",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#faf9f5",
+                        "outline-variant": "#bec9c2",
+                        "background": "#faf9f5",
+                        "surface": "#faf9f5",
+                        "surface-variant": "#e3e2df",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#6f7973",
+                        "tertiary-fixed": "#ffdbd0",
+                        "secondary-container": "#ffc329",
+                        "surface-container-high": "#e9e8e4",
+                        "on-primary-container": "#8bd6b7",
+                        "inverse-surface": "#2f312e",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#efeeea",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-tertiary-container": "#ffb79f",
+                        "inverse-primary": "#8bd6b6",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#992e00",
+                        "secondary-fixed": "#ffdf9f",
+                        "secondary": "#795900",
+                        "on-surface": "#1b1c1a",
+                        "on-secondary-fixed": "#261a00",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "primary-container": "#065f46"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "panel-padding": "20px",
+                        "gutter": "16px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Roboto"],
+                        "data-tabular": ["Roboto"],
+                        "label-sm": ["Roboto"],
+                        "headline-md": ["Roboto Slab"],
+                        "headline-xl": ["Roboto Slab"],
+                        "body-lg": ["Roboto"],
+                        "headline-lg": ["Roboto Slab"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "data-tabular": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        body { font-family: 'Roboto', sans-serif; background-color: theme('colors.background'); }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Roboto Slab', serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(16px); border-top: 1px solid rgba(255, 255, 255, 0.5); }
+        .soft-shadow { box-shadow: 0 8px 16px rgba(114, 32, 0, 0.08); }
+        .inset-focus:focus-within { box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); border-color: theme('colors.primary'); }
+
+        .cal-panel {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(190, 201, 194, 0.45);
+            box-shadow: 0 10px 28px rgba(0, 69, 50, 0.08);
+        }
+        .cal-tabs {
+            display: flex;
+            gap: 2px;
+            padding: 4px;
+            border-radius: 9999px;
+            background: #e9e8e4;
+            border: 1px solid rgba(190, 201, 194, 0.45);
+        }
+        .cal-tab {
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: #3f4944;
+            background: transparent;
+            transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .cal-tab:hover { color: #004532; }
+        .cal-tab-active {
+            background: #ffffff;
+            color: #004532;
+            box-shadow: 0 1px 3px rgba(0, 69, 50, 0.14);
+        }
+        .cal-add-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #0a6b4f 0%, #004532 100%);
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            box-shadow: 0 4px 12px rgba(0, 69, 50, 0.28);
+            transition: filter 0.15s ease, box-shadow 0.15s ease;
+        }
+        .cal-add-btn:hover {
+            filter: brightness(1.06);
+            box-shadow: 0 6px 16px rgba(0, 69, 50, 0.34);
+        }
+        .cal-month-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(190, 201, 194, 0.45);
+        }
+        .cal-month-title {
+            font-size: 22px;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            color: #004532;
+        }
+        .cal-nav {
+            display: flex;
+            gap: 8px;
+        }
+        .cal-nav-btn {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid rgba(190, 201, 194, 0.75);
+            background: #ffffff;
+            color: #004532;
+            transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .cal-nav-btn:hover {
+            background: #a6f2d1;
+            border-color: #1b6b51;
+            box-shadow: 0 2px 8px rgba(0, 69, 50, 0.12);
+        }
+        .cal-weekdays,
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 6px;
+        }
+        .cal-weekdays { margin-bottom: 8px; }
+        .cal-weekday {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #6f7973;
+            padding: 8px 0;
+        }
+        .cal-day {
+            min-height: 56px;
+            aspect-ratio: 1 / 1;
+            padding: 6px;
+            border: 1px solid #e3e2df;
+            border-radius: 12px;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .cal-day:hover {
+            border-color: #1b6b51;
+            box-shadow: 0 4px 12px rgba(0, 69, 50, 0.1);
+        }
+        .cal-day-empty {
+            min-height: 56px;
+            aspect-ratio: 1 / 1;
+            border: 1px dashed #e3e2df;
+            border-radius: 12px;
+            background: #f4f4f0;
+            opacity: 0.55;
+        }
+        .cal-day-num {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: #3f4944;
+        }
+        .cal-chip {
+            margin-top: auto;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1.25;
+            border-radius: 6px;
+            padding: 3px 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        }
+        .cal-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 9999px;
+            margin: auto auto 2px;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.85);
+        }
+        .cal-day-harvest { border: 2px solid #722000; background: #ffdbd0; box-shadow: inset 0 1px 0 rgba(255,255,255,0.5); }
+        .cal-day-harvest:hover { border-color: #722000; }
+        .cal-day-sell { border: 2px solid #004532; background: #a6f2d1; box-shadow: inset 0 1px 0 rgba(255,255,255,0.45); }
+        .cal-day-sell:hover { border-color: #004532; }
+        .cal-day-alert { border: 2px solid #ba1a1a; background: #ffdad6; box-shadow: inset 0 1px 0 rgba(255,255,255,0.45); }
+        .cal-day-alert:hover { border-color: #ba1a1a; }
+        .cal-day-task { background: #efeeea; }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: #f4f4f0;
+        }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        }
+        .reminder-card {
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #e3e2df;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            cursor: pointer;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .reminder-card:hover {
+            border-color: #1b6b51;
+            box-shadow: 0 4px 12px rgba(0, 69, 50, 0.08);
+        }
+        .reminder-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: #efeeea;
+            color: #004532;
+        }
+        .reminder-card:hover .reminder-icon {
+            background: #065f46;
+            color: #8bd6b7;
+        }
+        .reminder-card-alert {
+            background: rgba(255, 218, 214, 0.45);
+            border: 1px solid rgba(186, 26, 26, 0.28);
+            cursor: default;
+        }
+        .reminder-card-alert:hover {
+            border-color: rgba(186, 26, 26, 0.28);
+            box-shadow: none;
+        }
+        .reminder-icon-alert {
+            background: #ba1a1a;
+            color: #ffffff;
+        }
+        .reminder-card-alert:hover .reminder-icon-alert {
+            background: #ba1a1a;
+            color: #ffffff;
+        }
+        .cal-year-input {
+            width: 92px;
+            height: 36px;
+            border-radius: 10px;
+            border: 1px solid rgba(190, 201, 194, 0.75);
+            background: #ffffff;
+            color: #004532;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            padding: 0 8px;
+        }
+        .cal-year-input:focus {
+            outline: none;
+            border-color: #1b6b51;
+            box-shadow: 0 0 0 3px rgba(139, 214, 182, 0.35);
+        }
+        .cal-day-today {
+            box-shadow: 0 0 0 2px #004532 inset;
+        }
+        .cal-day-today .cal-day-num { color: #004532; font-weight: 700; }
+        .cal-day-selected {
+            border-color: #1b6b51;
+            box-shadow: 0 4px 12px rgba(0, 69, 50, 0.12);
+        }
+        .cal-chip-wrap { margin-top: auto; display: flex; flex-direction: column; gap: 3px; min-height: 0; }
+        .cal-chip { cursor: pointer; }
+        .cal-list { display: flex; flex-direction: column; gap: 12px; }
+        .cal-empty {
+            text-align: center;
+            color: #3f4944;
+            padding: 32px 16px;
+            font-size: 15px;
+        }
+        .cal-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .cal-modal.hidden { display: none; }
+        .cal-modal-card {
+            background: #ffffff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid rgba(190, 201, 194, 0.45);
+            box-shadow: 0 16px 40px rgba(0, 69, 50, 0.16);
+        }
+        .cal-field {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid rgba(190, 201, 194, 0.6);
+            background: #f4f4f0;
+            padding: 10px 12px;
+            font-size: 15px;
+            color: #1b1c1a;
+        }
+        .cal-field:focus {
+            outline: none;
+            border-color: #004532;
+            background: #ffffff;
+        }
+        .cal-dots { display: none; justify-content: center; gap: 3px; margin-top: auto; padding-bottom: 2px; }
+        @media (max-width: 767px) {
+            .cal-actions { width: 100%; flex-direction: column; }
+            .cal-tabs { width: 100%; justify-content: space-between; }
+            .cal-tab { flex: 1; text-align: center; padding: 8px 10px; }
+            .cal-add-btn { width: 100%; }
+            .cal-weekdays, .cal-grid { gap: 4px; }
+            .cal-day, .cal-day-empty { min-height: 44px; padding: 4px; border-radius: 8px; }
+            .cal-month-title { font-size: 20px; }
+            .cal-month-bar { flex-wrap: wrap; }
+            .cal-chip-wrap { display: none; }
+            .cal-dots { display: flex; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex flex-col md:flex-row h-screen overflow-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm flex justify-between items-center px-container-margin z-40 hidden md:flex">
+<div class="flex items-center gap-4">
+<span class="text-headline-sm font-headline-lg font-bold text-primary">CropMandi AI</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="../cropmandi_ai_dashboard/code.html">Market</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Weather</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Help</a>
+</div>
+<div class="flex gap-4 items-center">
+<button class="text-primary hover:text-primary-fixed-dim transition-colors"><span class="material-symbols-outlined">language</span></button>
+<button class="text-primary hover:text-primary-fixed-dim transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-primary hover:text-primary-fixed-dim transition-colors"><span class="material-symbols-outlined">account_circle</span></button>
+<img alt="User profile photo" class="w-8 h-8 rounded-full border-2 border-primary object-cover" data-alt="A detailed headshot portrait of a friendly farmer in a well-lit agricultural setting, warm earthy tones, professional trust-building photography, bright natural sunlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR1Iti_QGMwtHulWMZA-hUsQtMXoP1cNis7YPtQi69FcGsHuXpi01nGv4um--pHZEmKwiAz0elQZHVAKPLnIVBb_dpqwBUUQl0J3_WePBX4BRYOcxPgPYkO9uVxusFpB5Lm0ad_EZ8BTQ1PuvphAx6SQV2S5-VW_RliSkAuLX0GcaLt_EzCwROX7dcN07fhnfxT_BhmzdHXT5e2IYRK1aDnQ8I5u_W3Z6J23tuBJawc17ZQbJIaGL2"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-primary dark:bg-primary shadow-xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] flex flex-col py-panel-padding z-50 hidden md:flex">
+<div class="px-6 mb-8 flex items-center gap-4">
+<img alt="User profile photo" class="w-12 h-12 rounded-full border border-primary-fixed" data-alt="A macro close-up of a vibrant green leaf with dewdrops, symbolizing agricultural intelligence and growth, cinematic lighting, sharp focus, vibrant emerald and white tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpeqltSwm8kuWHBnIk6nlm_uI-gbMZa63V2T73VrNE44nJqyPVPTkHLlPfLJhKVHKn8KE5A4qQ9Eei2qrA0kpgksNIL2KI4LFsmb93jUAMpbeRQph103u7JIZyETwU4qQYJ6SsWSDvhUijoifBiFal0uItI-w6j_e9IODmX4hcwxoRJ8u9Zj38BdvrKF0izo-Onr_Vuc_pE2ING4QEOyKkapVGtMnBTNROICs6PKKcASWfmSnkmGCz"/>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-primary">CropMandi AI</h1>
+<p class="text-label-sm font-label-sm text-primary-fixed-dim">Agricultural Intelligence</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2 px-2">
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out rounded-lg" href="../cropmandi_ai_dashboard/code.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-body-md font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out rounded-lg" href="../cropmandi_ai_my_crops/code.html">
+<span class="material-symbols-outlined">agriculture</span>
+<span class="text-body-md font-body-md">My Crops</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out rounded-lg" href="../cropmandi_ai_analytics/code.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-body-md font-body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container shadow-[inset_4px_4px_8px_rgba(0,0,0,0.3)] rounded-lg mx-2 px-4 py-3 scale-95 duration-150 ease-in-out" href="../cropmandi_ai_farm_calendar/code.html">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-body-md font-body-md">Farm Calendar</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out rounded-lg" href="../cropmandi_ai_alert_center/code.html">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-body-md font-body-md">Alerts</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out rounded-lg" href="../cropmandi_ai_settings/code.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-md font-body-md">Settings</span>
+</a>
+<div class="mt-auto px-2">
+<button class="w-full flex items-center justify-center gap-2 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm py-3 rounded-full hover:bg-surface-container-high transition-all shadow-md">
+<span class="material-symbols-outlined">mic</span>
+                    Voice Assistant
+                </button>
+</div>
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 mt-4 hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out rounded-lg" href="../cropmandi_ai_login_register/code.html">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-body-md font-body-md">Logout</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 w-full md:ml-[280px] md:mt-16 h-full overflow-y-auto bg-surface-container-low relative">
+<!-- Textural background -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23004532\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+<div class="p-container-margin md:p-8 max-w-7xl mx-auto space-y-6 relative z-10 pb-32 md:pb-8">
+<!-- Header -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-headline-xl font-headline-xl text-primary">Farm Calendar</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant mt-2">Manage your planting, harvesting, and market timings.</p>
+</div>
+<div class="flex gap-2 cal-actions">
+<div class="cal-tabs" role="tablist">
+<button class="cal-tab cal-tab-active" type="button" id="cal-tab-monthly" data-view="monthly">Monthly</button>
+<button class="cal-tab" type="button" id="cal-tab-weekly" data-view="weekly">Weekly</button>
+<button class="cal-tab" type="button" id="cal-tab-upcoming" data-view="upcoming">Upcoming</button>
+</div>
+<button class="cal-add-btn" type="button" id="cal-add-button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Add Reminder
+                    </button>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Main Calendar View -->
+<div class="lg:col-span-8 space-y-6">
+<div class="glass-card cal-panel rounded-xl p-4 md:p-6 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-white opacity-50"></div>
+<div class="cal-month-bar">
+<h3 class="cal-month-title font-headline-md" id="cal-month-title"></h3>
+<div class="cal-nav">
+<input class="cal-year-input" id="cal-year-input" type="number" aria-label="Year"/>
+<button class="cal-nav-btn" type="button" id="cal-prev" aria-label="Previous"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="cal-nav-btn" type="button" id="cal-next" aria-label="Next"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div id="cal-monthly-view">
+<div class="cal-weekdays">
+<div class="cal-weekday">Sun</div>
+<div class="cal-weekday">Mon</div>
+<div class="cal-weekday">Tue</div>
+<div class="cal-weekday">Wed</div>
+<div class="cal-weekday">Thu</div>
+<div class="cal-weekday">Fri</div>
+<div class="cal-weekday">Sat</div>
+</div>
+<div class="cal-grid" id="cal-grid"></div>
+</div>
+<div class="cal-list hidden" id="cal-weekly-view"></div>
+<div class="cal-list hidden" id="cal-upcoming-view"></div>
+</div>
+</div>
+<!-- Sidebar Content -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Legend -->
+<div class="glass-card cal-panel rounded-xl p-5">
+<h4 class="text-headline-md font-headline-md text-primary mb-4 text-[18px]">Legend</h4>
+<div class="space-y-2">
+<div class="legend-item">
+<div class="legend-swatch bg-primary border border-primary-fixed"></div>
+<span class="font-body-md text-body-md text-on-surface-variant">Best Sell Window</span>
+</div>
+<div class="legend-item">
+<div class="legend-swatch bg-tertiary border border-tertiary-fixed"></div>
+<span class="font-body-md text-body-md text-on-surface-variant">Harvest Date</span>
+</div>
+<div class="legend-item">
+<div class="legend-swatch bg-error border border-error-container"></div>
+<span class="font-body-md text-body-md text-on-surface-variant">Weather Alert</span>
+</div>
+<div class="legend-item">
+<div class="legend-swatch border border-outline bg-surface-container"></div>
+<span class="font-body-md text-body-md text-on-surface-variant">Task/Reminder</span>
+</div>
+</div>
+</div>
+<!-- Upcoming Reminders -->
+<div class="glass-card cal-panel rounded-xl p-5 flex flex-col h-[calc(100%-250px)]">
+<div class="flex justify-between items-center mb-4">
+<h4 class="text-headline-md font-headline-md text-primary text-[18px]">Upcoming Reminders</h4>
+<button class="text-primary hover:text-primary-container text-sm font-label-sm" type="button" id="cal-view-all">View All</button>
+</div>
+<div class="space-y-3 overflow-y-auto pr-2" id="cal-sidebar-list"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 rounded-t-xl md:hidden bg-surface/90 dark:bg-surface-container-lowest/90 backdrop-blur-[20px] border-t border-outline-variant/20 shadow-[0_-4px_20px_rgba(114,32,0,0.08)] flex justify-around items-center px-4 py-2 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all scale-90 active:scale-100 rounded-xl" href="../cropmandi_ai_dashboard/code.html">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-sm font-label-sm-mobile mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all scale-90 active:scale-100 rounded-xl" href="../cropmandi_ai_my_crops/code.html">
+<span class="material-symbols-outlined">grass</span>
+<span class="text-label-sm font-label-sm-mobile mt-1">Crops</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full p-3 shadow-md scale-90 active:scale-100 transition-transform -mt-4 border-4 border-surface" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mic</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold p-2 hover:bg-surface-container-high transition-all scale-90 active:scale-100 rounded-xl bg-primary-container/10" href="../cropmandi_ai_farm_calendar/code.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="text-label-sm font-label-sm-mobile mt-1 text-primary">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all scale-90 active:scale-100 rounded-xl" href="../cropmandi_ai_alert_center/code.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="text-label-sm font-label-sm-mobile mt-1">Alerts</span>
+</a>
+</nav>
+<div id="cal-modal" class="cal-modal hidden" aria-hidden="true">
+<div class="cal-modal-card">
+<div class="p-5 border-b border-outline-variant/30 flex items-center justify-between">
+<h3 class="text-headline-md font-headline-md text-on-background text-[20px]" id="cal-modal-title">Add Reminder</h3>
+<button type="button" id="cal-modal-close" class="p-2 rounded-full hover:bg-surface-container text-on-surface-variant"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="p-5 space-y-4">
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2" for="cal-reminder-title">Title</label>
+<input class="cal-field" id="cal-reminder-title" type="text" maxlength="80" placeholder="Reminder title"/>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2" for="cal-reminder-date">Date</label>
+<input class="cal-field" id="cal-reminder-date" type="date"/>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2" for="cal-reminder-type">Reminder type</label>
+<select class="cal-field" id="cal-reminder-type">
+<option value="task">Task/Reminder</option>
+<option value="sell">Best Sell Window</option>
+<option value="harvest">Harvest Date</option>
+<option value="weather">Weather Alert</option>
+</select>
+</div>
+<p class="text-label-sm font-label-sm text-error hidden" id="cal-modal-error"></p>
+</div>
+<div class="p-5 border-t border-outline-variant/30 flex gap-3 justify-end">
+<button type="button" class="px-4 py-2 rounded-lg text-label-sm font-label-sm text-error border border-error/30 hover:bg-error-container hidden" id="cal-modal-delete">Delete</button>
+<button type="button" class="px-4 py-2 rounded-lg text-label-sm font-label-sm text-on-surface-variant hover:bg-surface-container" id="cal-modal-cancel">Cancel</button>
+<button type="button" class="cal-add-btn" id="cal-modal-save">Save</button>
+</div>
+</div>
+</div>
+<script src="../js/api.js"></script>
+<script src="../js/farm-calendar.js"></script>
+</body></html>

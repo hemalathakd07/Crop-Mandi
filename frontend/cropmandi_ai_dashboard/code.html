@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - CropMandi AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Roboto+Slab:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#722000",
+                    "surface-container-low": "#f4f4f0",
+                    "primary-fixed-dim": "#8bd6b6",
+                    "surface-container-highest": "#e3e2df",
+                    "on-background": "#1b1c1a",
+                    "on-surface-variant": "#3f4944",
+                    "error-container": "#ffdad6",
+                    "surface-dim": "#dbdad6",
+                    "surface-tint": "#1b6b51",
+                    "on-primary-fixed-variant": "#00513b",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#a6f2d1",
+                    "on-tertiary-fixed": "#390c00",
+                    "on-primary-fixed": "#002116",
+                    "on-secondary-container": "#6f5100",
+                    "secondary-fixed-dim": "#f9bd22",
+                    "inverse-on-surface": "#f2f1ed",
+                    "on-tertiary-fixed-variant": "#832600",
+                    "primary": "#004532",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#faf9f5",
+                    "outline-variant": "#bec9c2",
+                    "background": "#faf9f5",
+                    "surface": "#faf9f5",
+                    "surface-variant": "#e3e2df",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#6f7973",
+                    "tertiary-fixed": "#ffdbd0",
+                    "secondary-container": "#ffc329",
+                    "surface-container-high": "#e9e8e4",
+                    "on-primary-container": "#8bd6b7",
+                    "inverse-surface": "#2f312e",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#efeeea",
+                    "on-secondary-fixed-variant": "#5c4300",
+                    "on-tertiary-container": "#ffb79f",
+                    "inverse-primary": "#8bd6b6",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#992e00",
+                    "secondary-fixed": "#ffdf9f",
+                    "secondary": "#795900",
+                    "on-surface": "#1b1c1a",
+                    "on-secondary-fixed": "#261a00",
+                    "tertiary-fixed-dim": "#ffb59d",
+                    "primary-container": "#065f46"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "panel-padding": "20px",
+                    "gutter": "16px",
+                    "container-margin": "24px"
+            },
+            "fontFamily": {
+                    "body-md": ["Roboto"],
+                    "data-tabular": ["Roboto"],
+                    "label-sm": ["Roboto"],
+                    "headline-md": ["Roboto Slab"],
+                    "headline-xl": ["Roboto Slab"],
+                    "body-lg": ["Roboto"],
+                    "headline-lg": ["Roboto Slab"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "data-tabular": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "headline-xl": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .texture-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+        .soft-3d-card {
+            background: #FFFFFF;
+            box-shadow: 0 8px 16px rgba(0, 69, 50, 0.04), 0 2px 4px rgba(194, 65, 12, 0.02);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+        }
+        .soft-inset {
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+        }
+        .status-hold {
+            box-shadow: 0 0 12px rgba(249, 189, 34, 0.3);
+        }
+        html.razorpay-checkout-open,
+        body.razorpay-checkout-open {
+            overflow: visible !important;
+        }
+        html.razorpay-checkout-open .razorpay-container,
+        html.razorpay-checkout-open .razorpay-backdrop {
+            display: block !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: none !important;
+            max-height: none !important;
+            z-index: 2147483647 !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+        html.razorpay-checkout-open iframe.razorpay-checkout-frame {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            min-width: 100vw !important;
+            min-height: 100vh !important;
+            border: 0 !important;
+        }
+    </style>
+</head>
+<body class="bg-surface texture-bg text-on-surface font-body-md antialiased overflow-x-hidden min-h-screen">
+<!-- Top Navigation -->
+<nav class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm flex justify-between items-center px-container-margin z-40 hidden md:flex">
+<div class="flex items-center gap-6">
+<h2 class="text-headline-md font-headline-md text-primary font-bold">CropMandi AI</h2>
+<div class="flex gap-4 ml-8">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="../cropmandi_ai_dashboard/code.html">Market</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Weather</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Help</a>
+</div>
+</div>
+<div class="flex items-center gap-4 text-primary">
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors"><span class="material-symbols-outlined">language</span></button>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar placeholder image for the user profile, showing a subtle warm organic gradient in emerald and yellow tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz7Uux5XKPALdrCO0R6uUrkbF-aERr8gUObf6S62-wmCR1nGUI3kO6omKJFvqedk3UwPYrt4G2yWJzTCFnb5BOohMF5Xl1grdSBrJ7c3NjiAUQQWw3o-gafLseJvCMW4eBggwFBImIrdKwIgpOqMxdKDFmqVajarduvNEphOVqKKTnRmraQeHAx3wmPqti3CHv5imTdQNFnhdGbjDtgIrmwVQwQttJLITs46oH36rQkwnFDE7XDNfj"/>
+</div>
+</nav>
+<!-- Side Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-primary text-on-primary shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] flex flex-col py-panel-padding z-50 hidden md:flex">
+<div class="px-6 mb-8 flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover bg-surface-container-lowest" data-alt="A small circular logo featuring a stylized 3D leaf or sprout in warm green and gold tones, representing agricultural intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwPgAvUPYi9zmlB_VoyA4vgigaaC_V-9OeIWuDLAn1XhK0X7Pww0_hpOdMyZ0ks0L_BXNg21Er4Pduu81MzfcLHFmcNUZ-7KymKhTsyTip7tgDHWOlRQhVVi3XMTenBxFTxshSiXEbfmBzWp4fWZBeEXfAHAQWIvoy7v2er0GRfoh5mL3EsO9CAemFF3cZBnPeP0HObZ9JphKp8ofjUuUzyIp_KnpDBF3OSMnPz0lFbPUxQ7W3ho7i"/>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-primary leading-tight">CropMandi AI</h1>
+<p class="text-label-sm font-label-sm text-primary-fixed-dim">Agricultural Intelligence</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container shadow-[inset_4px_4px_8px_rgba(0,0,0,0.3)] rounded-lg mx-2 px-4 py-3 scale-95 duration-150 ease-in-out" href="../cropmandi_ai_dashboard/code.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all mx-2 rounded-lg duration-150 ease-in-out" href="../cropmandi_ai_my_crops/code.html">
+<span class="material-symbols-outlined">agriculture</span>
+<span class="font-label-sm text-label-sm">My Crops</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all mx-2 rounded-lg duration-150 ease-in-out" href="../cropmandi_ai_analytics/code.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-sm text-label-sm">Analytics</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all mx-2 rounded-lg duration-150 ease-in-out" href="../cropmandi_ai_farm_calendar/code.html">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-sm text-label-sm">Farm Calendar</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all mx-2 rounded-lg duration-150 ease-in-out" href="../cropmandi_ai_alert_center/code.html">
+<span class="material-symbols-outlined">notifications</span>
+<span class="font-label-sm text-label-sm">Alerts</span>
+</a>
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all mx-2 rounded-lg duration-150 ease-in-out mt-8" href="../cropmandi_ai_settings/code.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full py-3 bg-secondary text-on-secondary rounded-lg font-label-sm text-label-sm flex items-center justify-center gap-2 hover:bg-secondary/90 transition-colors shadow-md">
+<span class="material-symbols-outlined">mic</span>
+                Voice Assistant
+            </button>
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all mx-2 rounded-lg duration-150 ease-in-out mt-2" href="../cropmandi_ai_login_register/code.html">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-sm text-label-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Bottom Navigation (Mobile) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 rounded-t-xl md:hidden bg-surface/90 backdrop-blur-[20px] border-t border-outline-variant/20 shadow-[0_-4px_20px_rgba(114,32,0,0.08)] flex justify-around items-center px-4 py-2">
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full p-3 shadow-md scale-90 active:scale-100 transition-transform" href="../cropmandi_ai_dashboard/code.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-sm font-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all rounded-full scale-90 active:scale-100 transition-transform" href="../cropmandi_ai_my_crops/code.html">
+<span class="material-symbols-outlined">grass</span>
+<span class="text-label-sm font-label-sm mt-1">Crops</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all rounded-full scale-90 active:scale-100 transition-transform relative top-[-10px] bg-primary text-on-primary shadow-lg border-2 border-surface" href="#">
+<span class="material-symbols-outlined">mic</span>
+<span class="text-label-sm font-label-sm mt-1">Voice</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all rounded-full scale-90 active:scale-100 transition-transform" href="../cropmandi_ai_alert_center/code.html">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="text-label-sm font-label-sm mt-1">Alerts</span>
+</a>
+</nav>
+<!-- Main Content Canvas -->
+<main class="md:ml-[280px] pt-4 md:pt-20 px-4 md:px-container-margin pb-24 md:pb-12 min-h-screen">
+<!-- Header Section -->
+<header class="mb-8">
+<h2 class="text-headline-xl font-headline-xl text-on-background mb-1" id="dash-greeting">Good morning, Hemalatha</h2>
+<div class="flex items-center text-on-surface-variant gap-2 text-body-md font-body-md">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span id="dash-location-label">Sakleshpur</span>
+</div>
+</header>
+<!-- Crop Controls -->
+<section class="soft-3d-card p-4 md:p-6 mb-8 flex flex-col md:flex-row gap-4 items-end">
+<div class="w-full md:flex-1">
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Commodity</label>
+<div class="relative soft-inset rounded-lg bg-surface-container-low border focus-within:border-primary border-transparent transition-colors">
+<select class="w-full bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-background p-3 appearance-none" id="dash-crop">
+<option value="">Loading...</option>
+<option value="coffee">Coffee</option>
+<option value="pepper">Black Pepper</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="w-full md:flex-1">
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Variety</label>
+<div class="relative soft-inset rounded-lg bg-surface-container-low border focus-within:border-primary border-transparent transition-colors">
+<select class="w-full bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-background p-3 appearance-none" id="dash-series">
+<option value="">Loading...</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="w-full md:flex-1">
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Location</label>
+<div class="relative soft-inset rounded-lg bg-surface-container-low border focus-within:border-primary border-transparent transition-colors">
+<select class="w-full bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-background p-3 appearance-none" id="dash-location">
+<option value="">Loading locations…</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="w-full md:flex-1">
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Quantity (Quintals)</label>
+<div class="relative soft-inset rounded-lg bg-surface-container-low border focus-within:border-primary border-transparent transition-colors flex items-center">
+<button class="p-3 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">remove</span></button>
+<input class="w-full bg-transparent border-none focus:ring-0 text-body-md font-body-md text-center text-on-background p-3" type="number" value="50" id="dash-quantity"/>
+<button class="p-3 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">add</span></button>
+</div>
+</div>
+<div class="w-full md:flex-1">
+<button class="w-full bg-primary text-on-primary py-3 px-4 rounded-lg text-label-sm font-label-sm shadow-md hover:bg-primary-container hover:text-on-primary-container transition-all flex justify-center items-center gap-2" id="dash-refresh" type="button">
+<span class="material-symbols-outlined">sync</span>
+                    Update Dashboard
+                </button>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-8">
+<!-- Price Outlook -->
+<div class="md:col-span-8 soft-3d-card p-6 md:p-8 relative overflow-hidden flex flex-col justify-center">
+<h3 class="text-headline-lg font-headline-lg text-on-background mb-4" id="dash-rec-title">Price Outlook</h3>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div class="bg-surface-container-low p-4 rounded-lg border border-outline-variant/40 flex flex-col justify-center min-h-[132px]">
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-2">Current price</span>
+<span class="text-headline-md font-headline-md text-primary block" id="dash-latest-price">…</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-1" id="dash-latest-unit"></span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-outline-variant/40 flex flex-col justify-center min-h-[132px]">
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-2">Crop / Variety</span>
+<span class="text-body-md font-body-md text-on-background font-semibold block" id="dash-rec-crop">—</span>
+<span class="text-body-md font-body-md text-on-background block mt-1" id="dash-rec-variety">—</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-outline-variant/40 flex flex-col justify-center min-h-[132px]">
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-2">Best APMC</span>
+<span class="text-body-md font-body-md text-on-background font-bold block" id="dash-best-apmc">—</span>
+<span class="text-headline-md font-headline-md text-primary block mt-1" id="dash-best-apmc-price"></span>
+</div>
+</div>
+<p class="hidden" id="dash-rec-body"></p>
+<p class="hidden" id="dash-rec-location"></p>
+<p class="hidden" id="dash-rec-predicted"></p>
+<p class="hidden" id="dash-latest-meta"></p>
+<p class="hidden" id="dash-source-note"></p>
+<div class="hidden" id="dash-rec-confidence"></div>
+</div>
+<!-- Side Panels Stack -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- Weather Impact Panel -->
+<div class="soft-3d-card p-6 flex-1 flex flex-col justify-center relative overflow-hidden">
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-secondary-fixed/20 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between mb-4">
+<h4 class="text-headline-md font-headline-md text-on-background">Weather Impact</h4>
+<span class="material-symbols-outlined text-secondary-fixed-dim text-[32px]" style="font-variation-settings: 'FILL' 1;">light_mode</span>
+</div>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="text-headline-xl font-headline-xl text-on-background" id="dash-weather-temp"></span>
+<span class="text-body-md font-body-md text-on-surface-variant" id="dash-weather-desc">Weather unavailable</span>
+</div>
+<div class="flex items-center gap-4 text-data-tabular font-data-tabular text-on-surface-variant mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">water_drop</span> <span id="dash-weather-humidity"></span></span>
+</div>
+<div class="bg-primary/10 text-primary p-3 rounded-lg text-label-sm font-label-sm border border-primary/20 flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px]">info</span>
+<span id="dash-weather-note">Weather unavailable</span>
+</div>
+</div>
+<!-- Action Panel -->
+<div class="soft-3d-card p-6 flex-1 flex flex-col justify-center gap-3">
+<button class="w-full bg-surface-container-high text-on-surface py-3 px-4 rounded-lg text-label-sm font-label-sm hover:bg-surface-variant transition-colors flex items-center justify-center gap-2 border border-outline-variant/30" id="dash-set-alert" type="button">
+<span class="material-symbols-outlined">notifications_active</span> Set Alert
+                    </button>
+<button class="w-full bg-surface-container-low text-primary py-3 px-4 rounded-lg text-label-sm font-label-sm hover:bg-primary/5 transition-colors flex items-center justify-center gap-2 border border-primary/30" id="dash-save-prediction" type="button">
+<span class="material-symbols-outlined">bookmark</span> Save Prediction
+                    </button>
+<p class="text-label-sm font-label-sm text-primary hidden" id="dash-action-feedback"></p>
+</div>
+</div>
+</div>
+<!-- Next Session Estimate -->
+<div class="md:col-span-12 soft-3d-card p-6 md:p-8 mb-8">
+<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-4">
+<div>
+<h3 class="text-headline-md font-headline-md text-on-background">Next Session Estimate</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Predicted price for the selected crop, variety, and location.</p>
+</div>
+<div class="text-right">
+<p class="text-label-sm font-label-sm text-on-surface-variant">Series</p>
+<p class="text-body-md font-body-md text-on-background font-semibold" id="dash-est-series">—</p>
+</div>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-4" id="dash-est-location"></p>
+<p class="text-label-sm font-label-sm text-primary mb-4 hidden" id="dash-est-status">Loading next-session estimate...</p>
+<p class="text-label-sm font-label-sm text-error mb-4 hidden" id="dash-est-error"></p>
+<div id="dash-est-body">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+<div class="bg-surface-container-low p-4 rounded-lg soft-inset">
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Latest observed</span>
+<span class="text-headline-md font-headline-md text-primary block" id="dash-est-latest-price">…</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg soft-inset">
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Next-session estimate</span>
+<span class="text-headline-md font-headline-md text-on-background block" id="dash-est-next-price">…</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+<div>
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Latest observation</span>
+<span class="text-body-md font-body-md text-on-background font-semibold block" id="dash-est-latest-date">—</span>
+</div>
+<div>
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Target session</span>
+<span class="text-body-md font-body-md text-on-background font-semibold block" id="dash-est-target">—</span>
+</div>
+<div>
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Unit</span>
+<span class="text-body-md font-body-md text-on-background font-semibold block" id="dash-est-unit">—</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Latest Prices Section -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-8">
+<!-- Market Comparison Table -->
+<div class="md:col-span-12 soft-3d-card p-0 overflow-hidden flex flex-col">
+<div class="p-6 border-b border-outline-variant/20 bg-surface/50">
+<h3 class="text-headline-md font-headline-md text-on-background">Latest prices</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1" id="dash-table-note"></p>
+<p class="text-label-sm font-label-sm text-primary mt-1 hidden" id="dash-table-status">Loading market prices...</p>
+</div>
+<div class="overflow-x-auto flex-1 p-2">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/20">
+<th class="p-4 text-label-sm font-label-sm text-on-surface-variant font-normal" id="dash-col-series">Series</th>
+<th class="p-4 text-label-sm font-label-sm text-on-surface-variant font-normal text-right" id="dash-col-latest">Latest (Rs./50 Kg)</th>
+<th class="p-4 text-label-sm font-label-sm text-on-surface-variant font-normal text-right" id="dash-col-asof">As of</th>
+</tr>
+</thead>
+<tbody class="text-data-tabular font-data-tabular" id="dash-price-rows">
+<tr>
+<td class="p-6 text-center text-on-surface-variant" colspan="3">Loading market prices...</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-6 border-t border-outline-variant/20 bg-surface/50">
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-2">Market Centres</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-2" id="dash-centres-location"></p>
+<ul class="space-y-1 text-body-md font-body-md text-on-background" id="dash-centres"></ul>
+</div>
+</div>
+</div>
+<!-- Cold Storage -->
+<div class="soft-3d-card p-6 md:p-8 mb-8">
+<div class="mb-4">
+<h3 class="text-headline-md font-headline-md text-on-background" id="dash-storage-heading">Cold Storage</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Uses the location selected above. Nearby facilities are labelled when they are not in that village. Availability is never assumed.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end mb-4">
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2" for="dash-storage-crop">Crop</label>
+<div class="relative soft-inset rounded-lg bg-surface-container-low border border-transparent">
+<select class="w-full bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-background p-3 appearance-none" id="dash-storage-crop">
+<option value="coffee">Coffee</option>
+<option value="pepper">Black Pepper</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2" for="dash-storage-qty">Quantity (kg)</label>
+<div class="relative soft-inset rounded-lg bg-surface-container-low border border-transparent">
+<input class="w-full bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-background p-3" id="dash-storage-qty" min="0" placeholder="Optional" type="number"/>
+</div>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Farmer location</label>
+<p class="text-body-md font-body-md text-on-background p-3" id="dash-storage-location-label">From location selector</p>
+</div>
+<div>
+<button class="w-full bg-primary text-on-primary py-3 px-4 rounded-lg text-label-sm font-label-sm shadow-md hover:bg-primary-container hover:text-on-primary-container transition-all" id="dash-storage-search" type="button">Search nearby</button>
+</div>
+</div>
+<p class="text-label-sm font-label-sm text-primary mb-2 hidden" id="dash-storage-status">Searching nearby cold storages...</p>
+<p class="text-label-sm font-label-sm text-error mb-2 hidden" id="dash-storage-error"></p>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-2" id="dash-storage-count"></p>
+<p class="text-label-sm font-label-sm text-on-surface-variant mb-4" id="dash-storage-routing"></p>
+<ul class="space-y-3" id="dash-storage-list"></ul>
+</div>
+<!-- Demo Payment -->
+<div class="soft-3d-card p-6 md:p-8 mb-8">
+<div class="mb-4">
+<h3 class="text-headline-md font-headline-md text-on-background">Demo Payment — Razorpay Test Mode</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Uses crop and quantity from the Cold Storage section above. Amount is a fixed demo value, not a market price.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+<div class="bg-surface-container-low p-4 rounded-lg soft-inset">
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Crop</span>
+<span class="text-body-md font-body-md text-on-background font-semibold block">From Cold Storage crop selector</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg soft-inset">
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Quantity (kg)</span>
+<span class="text-body-md font-body-md text-on-background font-semibold block">From Cold Storage quantity (default 10 kg if blank)</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg soft-inset">
+<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Amount</span>
+<span class="text-headline-md font-headline-md text-primary block">₹100</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Fixed demo amount</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-3 items-center">
+<button class="bg-primary text-on-primary py-3 px-4 rounded-lg text-label-sm font-label-sm shadow-md hover:bg-primary-container hover:text-on-primary-container transition-all" id="dash-pay-button" type="button">Pay ₹100 (Test Mode)</button>
+</div>
+<p class="text-label-sm font-label-sm text-primary mt-4 hidden" id="dash-pay-status"></p>
+<p class="text-label-sm font-label-sm text-error mt-4 hidden" id="dash-pay-error"></p>
+<p class="text-body-md font-body-md text-on-background mt-4 hidden" id="dash-pay-success"></p>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-4">Demo payment only. This does not represent a real crop sale, storage booking, or production authentication. The backend uses a demo identity, not a real login.</p>
+</div>
+</main>
+<script src="https://checkout.razorpay.com/v1/checkout.js" onerror="window.__razorpayScriptFailed=true"></script>
+<script src="../js/api.js?v=pay-rzp-1"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/dashboard-latest.js"></script>
+<script src="../js/dashboard-estimate.js"></script>
+<script src="../js/dashboard-ui.js"></script>
+<script src="../js/dashboard-storage.js?v=cs-1"></script>
+<script src="../js/dashboard-payment.js?v=pay-rzp-1"></script>
+</body></html>

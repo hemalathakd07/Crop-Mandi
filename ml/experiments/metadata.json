@@ -1,0 +1,13 @@
+{
+  "coffee_data_status": "UNVERIFIED_HISTORICAL_COFFEE_DATA",
+  "coffee_data_usage": "EXPERIMENTAL_ONLY",
+  "pepper_price_type": "indicative_daily_average",
+  "target": "next_published_available_market_session",
+  "paths": {
+    "evaluation": "ml\\experiments\\evaluation_results.json",
+    "predictions": "ml\\experiments\\prediction_output.json",
+    "comparison": "ml\\experiments\\model_comparison.json",
+    "experimental_coffee_csv": "data/experimental/coffee_weekday_sessions.csv",
+    "artifacts": "ml/artifacts/"
+  }
+}

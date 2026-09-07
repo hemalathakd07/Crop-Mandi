@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analytics - CropMandi AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Roboto+Slab:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#722000",
+                      "surface-container-low": "#f4f4f0",
+                      "primary-fixed-dim": "#8bd6b6",
+                      "surface-container-highest": "#e3e2df",
+                      "on-background": "#1b1c1a",
+                      "on-surface-variant": "#3f4944",
+                      "error-container": "#ffdad6",
+                      "surface-dim": "#dbdad6",
+                      "surface-tint": "#1b6b51",
+                      "on-primary-fixed-variant": "#00513b",
+                      "on-error": "#ffffff",
+                      "primary-fixed": "#a6f2d1",
+                      "on-tertiary-fixed": "#390c00",
+                      "on-primary-fixed": "#002116",
+                      "on-secondary-container": "#6f5100",
+                      "secondary-fixed-dim": "#f9bd22",
+                      "inverse-on-surface": "#f2f1ed",
+                      "on-tertiary-fixed-variant": "#832600",
+                      "primary": "#004532",
+                      "on-primary": "#ffffff",
+                      "surface-bright": "#faf9f5",
+                      "outline-variant": "#bec9c2",
+                      "background": "#faf9f5",
+                      "surface": "#faf9f5",
+                      "surface-variant": "#e3e2df",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "outline": "#6f7973",
+                      "tertiary-fixed": "#ffdbd0",
+                      "secondary-container": "#ffc329",
+                      "surface-container-high": "#e9e8e4",
+                      "on-primary-container": "#8bd6b7",
+                      "inverse-surface": "#2f312e",
+                      "on-error-container": "#93000a",
+                      "on-secondary": "#ffffff",
+                      "surface-container": "#efeeea",
+                      "on-secondary-fixed-variant": "#5c4300",
+                      "on-tertiary-container": "#ffb79f",
+                      "inverse-primary": "#8bd6b6",
+                      "error": "#ba1a1a",
+                      "tertiary-container": "#992e00",
+                      "secondary-fixed": "#ffdf9f",
+                      "secondary": "#795900",
+                      "on-surface": "#1b1c1a",
+                      "on-secondary-fixed": "#261a00",
+                      "tertiary-fixed-dim": "#ffb59d",
+                      "primary-container": "#065f46"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "panel-padding": "20px",
+                      "gutter": "16px",
+                      "container-margin": "24px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Roboto"
+                      ],
+                      "data-tabular": [
+                              "Roboto"
+                      ],
+                      "label-sm": [
+                              "Roboto"
+                      ],
+                      "headline-md": [
+                              "Roboto Slab"
+                      ],
+                      "headline-xl": [
+                              "Roboto Slab"
+                      ],
+                      "body-lg": [
+                              "Roboto"
+                      ],
+                      "headline-lg": [
+                              "Roboto Slab"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-tabular": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+      </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md h-full flex antialiased selection:bg-primary selection:text-on-primary">
+<!-- SideNavBar -->
+<nav class="bg-primary dark:bg-primary shadow-xl fixed left-0 top-0 h-full w-[280px] hidden md:flex flex-col py-panel-padding z-50 overflow-y-auto">
+<div class="px-container-margin mb-8 flex items-center space-x-3">
+<div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center shrink-0 shadow-[0_4px_12px_rgba(0,69,50,0.4)]">
+<span class="material-symbols-outlined text-primary text-2xl font-bold" data-icon="agriculture">agriculture</span>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-primary m-0 p-0 leading-none">CropMandi AI</h1>
+<p class="text-label-sm font-label-sm text-primary-fixed-dim mt-1">Agricultural Intelligence</p>
+</div>
+</div>
+<div class="flex-1 px-2 space-y-1">
+<a class="flex items-center space-x-3 text-on-primary-container opacity-80 px-4 py-3 rounded-lg hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out hover:scale-100" href="../cropmandi_ai_dashboard/code.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-body-md font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 text-on-primary-container opacity-80 px-4 py-3 rounded-lg hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out hover:scale-100" href="../cropmandi_ai_my_crops/code.html">
+<span class="material-symbols-outlined" data-icon="agriculture">agriculture</span>
+<span class="text-body-md font-body-md">My Crops</span>
+</a>
+<a class="flex items-center space-x-3 bg-primary-container text-on-primary-container shadow-[inset_4px_4px_8px_rgba(0,0,0,0.3)] rounded-lg mx-2 px-4 py-3 transition-all" href="../cropmandi_ai_analytics/code.html">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="text-body-md font-body-md">Analytics</span>
+</a>
+<a class="flex items-center space-x-3 text-on-primary-container opacity-80 px-4 py-3 rounded-lg hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out hover:scale-100" href="../cropmandi_ai_farm_calendar/code.html">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="text-body-md font-body-md">Farm Calendar</span>
+</a>
+<a class="flex items-center space-x-3 text-on-primary-container opacity-80 px-4 py-3 rounded-lg hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out hover:scale-100" href="../cropmandi_ai_alert_center/code.html">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="text-body-md font-body-md">Alerts</span>
+</a>
+<a class="flex items-center space-x-3 text-on-primary-container opacity-80 px-4 py-3 rounded-lg hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out hover:scale-100" href="../cropmandi_ai_settings/code.html">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-body-md font-body-md">Settings</span>
+</a>
+</div>
+<div class="px-container-margin mt-auto mb-4">
+<button class="w-full bg-secondary-container text-on-secondary-container hover:bg-secondary hover:text-on-secondary rounded-lg py-3 flex items-center justify-center space-x-2 transition-colors shadow-md group">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform" data-icon="mic" data-weight="fill">mic</span>
+<span class="text-body-md font-body-md font-semibold">Voice Assistant</span>
+</button>
+</div>
+<div class="px-container-margin">
+<a class="flex items-center space-x-3 text-on-primary-container opacity-80 px-4 py-3 rounded-lg hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out hover:scale-100" href="../cropmandi_ai_login_register/code.html">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-body-md font-body-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-[280px] flex flex-col min-h-screen pb-24 md:pb-0 relative overflow-x-hidden">
+<!-- Subtle background texture overlay -->
+<div class="absolute inset-0 z-[-1] opacity-[0.03] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100\' height=\'100\' filter=\'url(%23noise)\'/%3E%3C/svg%3E');"></div>
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm fixed top-0 right-0 w-full md:w-[calc(100%-280px)] h-16 z-40 flex justify-between items-center px-container-margin transition-all">
+<div class="flex items-center space-x-4 md:hidden">
+<button class="text-primary hover:text-primary/80 transition-colors p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<span class="text-headline-md font-headline-md text-primary font-bold">CropMandi</span>
+</div>
+<div class="hidden md:flex items-center space-x-6">
+<div class="relative group">
+<input class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface focus:ring-2 focus:ring-primary w-64 shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] transition-all group-hover:bg-surface-container-high placeholder:text-on-surface-variant/60" placeholder="Search markets, crops..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-hover:text-primary transition-colors" data-icon="search">search</span>
+</div>
+<nav class="flex space-x-4">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors py-1" href="../cropmandi_ai_dashboard/code.html">Market</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors py-1" href="#">Weather</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors py-1" href="#">Help</a>
+</nav>
+</div>
+<div class="flex items-center space-x-2">
+<button class="text-primary dark:text-primary-fixed-dim hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high active:opacity-70 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+<button class="text-primary dark:text-primary-fixed-dim hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high active:opacity-70 relative focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2.5 h-2.5 bg-tertiary rounded-full border-2 border-surface"></span>
+</button>
+<button class="ml-2 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-full shadow-sm hover:shadow-md transition-shadow border border-outline-variant/30 overflow-hidden w-9 h-9">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of an Indian farmer looking optimistic and intelligent, clear lighting, warm tones, standing in front of a subtly blurred agricultural background. High quality digital photography, clear focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZezXvKmx_nhIxjyP03NiEiM4TmcfToN1camn_vFN-_vZz371mnALWPmMOwICIoAnmvdCW_WMrrY23dZSDNjXoFUMuLCDcfYUoTqEj-WnrrULOCktvTBSq0Xxt3lWEHhi_uPYcATlAA5gBbyeVytj5sOVeFjUWWwD_NyXQFsQKh-icIe-CqeTWz7jTqtSEUomHBqQXyfZ3lYrL8ewx5IbkOwmEgcEyu0WxiPWUyXyi3znHdYQO--iP"/>
+</button>
+</div>
+</header>
+<!-- Content Padding top for fixed header -->
+<div class="pt-24 px-container-margin flex-1 flex flex-col gap-8 max-w-7xl mx-auto w-full">
+<!-- Page Header & Filters -->
+<section class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-primary mb-1">Market Analytics</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Deep dive into pricing trends and AI predictions.</p>
+</div>
+<div class="flex flex-wrap gap-3 p-4 bg-surface-container-lowest rounded-xl shadow-[0_8px_16px_rgba(0,69,50,0.04)] border border-surface-variant/50 backdrop-blur-sm relative z-20">
+<!-- Select Fields with "soft-pocket" inset style -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border border-transparent focus:border-primary rounded-lg py-2 pl-3 pr-8 text-label-sm font-label-sm text-on-surface shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] focus:ring-0 cursor-pointer outline-none hover:bg-surface-container transition-colors">
+<option>Crop: Cardamom</option>
+<option>Crop: Coffee</option>
+<option>Crop: Pepper</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-sm" data-icon="expand_more">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border border-transparent focus:border-primary rounded-lg py-2 pl-3 pr-8 text-label-sm font-label-sm text-on-surface shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] focus:ring-0 cursor-pointer outline-none hover:bg-surface-container transition-colors">
+<option>Variety: All</option>
+<option>Variety: 8mm</option>
+<option>Variety: 7mm</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-sm" data-icon="expand_more">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border border-transparent focus:border-primary rounded-lg py-2 pl-3 pr-8 text-label-sm font-label-sm text-on-surface shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] focus:ring-0 cursor-pointer outline-none hover:bg-surface-container transition-colors">
+<option>State: Karnataka</option>
+<option>State: Kerala</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-sm" data-icon="expand_more">expand_more</span>
+</div>
+<div class="relative hidden sm:block">
+<select class="appearance-none bg-surface-container-low border border-transparent focus:border-primary rounded-lg py-2 pl-3 pr-8 text-label-sm font-label-sm text-on-surface shadow-[inset_0_2px_4px_rgba(0,0,0,0.05)] focus:ring-0 cursor-pointer outline-none hover:bg-surface-container transition-colors">
+<option>Time: Last 30 Days</option>
+<option>Time: Last 7 Days</option>
+<option>Time: YTD</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-sm" data-icon="expand_more">expand_more</span>
+</div>
+<button class="bg-primary text-on-primary rounded-lg px-4 py-2 text-label-sm font-label-sm font-semibold shadow-sm hover:shadow-md hover:bg-primary-container transition-all active:scale-95 flex items-center space-x-1">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+<span>Apply Filters</span>
+</button>
+</div>
+</section>
+<!-- KPI Cards Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_8px_16px_rgba(114,32,0,0.04)] border-t border-white/50 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110 duration-500"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Avg. Price / Qtl</p>
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="payments">payments</span>
+</div>
+</div>
+<div class="relative z-10">
+<h3 class="text-headline-lg font-headline-lg text-on-surface mb-1">Loading...</h3>
+<div class="flex items-center text-sm font-data-tabular text-surface-tint">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="trending_up">trending_up</span>
+<span>Loading market data...</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_8px_16px_rgba(0,69,50,0.06)] border-t border-white/50 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+<div class="absolute top-0 right-0 w-24 h-24 bg-secondary-container/20 rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-110 duration-500"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1">
+                            AI Prediction 
+                            <span class="material-symbols-outlined text-[10px] text-secondary" data-icon="auto_awesome">auto_awesome</span>
+</p>
+<div class="w-8 h-8 rounded-full bg-secondary-container/50 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-sm" data-icon="insights">insights</span>
+</div>
+</div>
+<div class="relative z-10">
+<h3 class="text-headline-lg font-headline-lg text-on-surface mb-1">Loading...</h3>
+<div class="flex items-center text-sm font-data-tabular text-on-surface-variant">
+<span>Loading prediction data...</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_8px_16px_rgba(114,32,0,0.04)] border-t border-white/50 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4 relative z-10">
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Best APMC Rate</p>
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="storefront">storefront</span>
+</div>
+</div>
+<div class="relative z-10">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-1 truncate">Loading...</h3>
+<div class="flex flex-col mt-2">
+<span class="text-sm font-data-tabular text-on-surface">Loading market data...</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-1">Fetching latest prices</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_8px_16px_rgba(0,69,50,0.04)] border-t border-white/50 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4 relative z-10">
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Market Trend</p>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined text-sm" data-icon="moving">moving</span>
+</div>
+</div>
+<div class="relative z-10 flex flex-col items-start mt-2">
+<!-- 3D Status Indicator - will be updated by real data -->
+<div class="bg-secondary-container/90 border border-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full shadow-[inset_0_1px_2px_rgba(255,255,255,0.5),0_2px_8px_rgba(255,195,41,0.4)] flex items-center space-x-2 font-label-sm text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span>
+<span class="font-bold tracking-wide">Loading...</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-3">Loading trend analysis...</p>
+</div>
+</div>
+</section>
+<!-- Main Charts & Map Bento Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Large Interactive Chart (Spans 2 columns on large screens) -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-2xl p-6 shadow-[0_12px_24px_rgba(0,69,50,0.05)] border-t border-white/60 flex flex-col h-full min-h-[400px]">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface" id="chart-title">Price Trend</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1" id="chart-subtitle">Loading verified market data...</p>
+</div>
+<div class="flex space-x-2 bg-surface-container-low p-1 rounded-lg shadow-inner">
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-md bg-surface shadow-sm text-primary font-bold transition-all">1M</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-md text-on-surface-variant hover:text-primary transition-all">3M</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-md text-on-surface-variant hover:text-primary transition-all">1Y</button>
+</div>
+</div>
+<!-- Chart.js Container -->
+<div class="flex-1 relative w-full h-full min-h-[300px]">
+<canvas id="priceTrendChart"></canvas>
+<!-- Accessibility explanation for screen readers -->
+<div class="sr-only">
+                            A line chart showing the price trend over the selected time period based on verified market data.
+                            Chart will be populated with real historical data from the backend API.
+                        </div>
+</div>
+</div>
+<!-- Secondary Vis: Regional 3D Map -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-[0_12px_24px_rgba(114,32,0,0.05)] border-t border-white/60 flex flex-col relative overflow-hidden h-full min-h-[400px]">
+<div class="mb-4 relative z-10">
+<h3 class="text-headline-md font-headline-md text-on-surface">Regional Heatmap</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Price variance across Karnataka APMCs</p>
+</div>
+<!-- Map Visual Placeholder -->
+<div class="flex-1 rounded-xl bg-surface-container-low/50 border border-outline-variant/20 relative overflow-hidden flex items-center justify-center inset-shadow-sm group">
+<!-- Map image -->
+<img alt="3D Map of Karnataka showing price hotspots" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" data-alt="A clean, minimalist 3D topographical map render of Karnataka state, India. The map should use a pale cream background with subtle raised terrain features. It should have soft, warm lighting. There should be glowing hotspot markers in emerald green and terracotta orange colors indicating market prices, positioned smoothly on the terrain. High-end professional data visualization style." data-location="Karnataka" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP7bQ6_EZPu3HZ-FpR46tMyzIS0lR3_7NzK2PEi1Lv3h5VT0dnVo442IQTuSAYZ2W2Ru4uc24rtlUjsUtkMYfuT_2fqxlR9-jMp9fJJBnFqcqu_zEOkcwq3E-vIeraBvQlT-iSCd-BGhOJ0ovrS_32SdMAi9jnF6z7FV96KXWg8xYSioDKjp4d69uU6oJVnuS7tLihjsWKiX40_AvhP5UiyU0S39anqoko-JL30GBQzLgK7k0CDgKe"/>
+<!-- Interactive overlay points will be populated by real regional data -->
+<div class="absolute inset-0 z-10 pointer-events-none" id="heatmap-overlay">
+<!-- Hotspots will be added dynamically based on real market data -->
+</div>
+<!-- Legend overlay -->
+<div class="absolute bottom-3 left-3 bg-surface-container-lowest/90 backdrop-blur-md p-2 rounded-lg shadow-sm border border-outline-variant/20 z-20">
+<p class="text-[10px] font-label-sm text-on-surface-variant mb-1 uppercase">Price Level</p>
+<div class="flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-xs font-data-tabular">High</span>
+</div>
+<div class="flex items-center space-x-2 mt-1">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="text-xs font-data-tabular">Avg</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Data Table: Market Comparison -->
+<section class="bg-surface-container-lowest rounded-2xl shadow-[0_12px_32px_rgba(0,0,0,0.03)] border-t border-white/60 overflow-hidden mb-8">
+<div class="p-6 border-b border-outline-variant/20 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div>
+<h3 class="text-headline-md font-headline-md text-on-surface">APMC Market Comparison</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Detailed breakdown of top performing markets</p>
+</div>
+<button class="text-primary hover:text-primary-container font-label-sm text-sm font-semibold flex items-center gap-1 transition-colors">
+                        Export Data <span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">
+<th class="p-4 font-semibold border-b border-outline-variant/20">Market (APMC)</th>
+<th class="p-4 font-semibold border-b border-outline-variant/20">Today's Rate (₹/Qtl)</th>
+<th class="p-4 font-semibold border-b border-outline-variant/20">Volume</th>
+<th class="p-4 font-semibold border-b border-outline-variant/20">7-Day Prediction</th>
+<th class="p-4 font-semibold border-b border-outline-variant/20">Action Signal</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-data-tabular">
+<!-- Market comparison rows will be populated by real data from analytics API -->
+<tr>
+<td colspan="5" class="p-4 text-center text-on-surface-variant">
+Loading verified market data...
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="bg-surface/90 dark:bg-surface-container-lowest/90 backdrop-blur-[20px] fixed bottom-0 left-0 w-full z-50 rounded-t-xl md:hidden border-t border-outline-variant/20 shadow-[0_-4px_20px_rgba(114,32,0,0.08)] flex justify-around items-center px-4 py-2 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all scale-90 active:scale-100 rounded-lg" href="../cropmandi_ai_dashboard/code.html">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-label-sm font-label-sm-mobile mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all scale-90 active:scale-100 rounded-lg" href="../cropmandi_ai_my_crops/code.html">
+<span class="material-symbols-outlined" data-icon="grass">grass</span>
+<span class="text-label-sm font-label-sm-mobile mt-1">Crops</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all scale-90 active:scale-100 rounded-lg group relative" href="#">
+<div class="absolute -top-6 bg-secondary-container text-on-secondary-container p-3 rounded-full shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="mic" data-weight="fill">mic</span>
+</div>
+<span class="text-label-sm font-label-sm-mobile mt-8">Voice</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full p-3 shadow-md hover:bg-surface-container-high transition-all scale-90 active:scale-100" href="../cropmandi_ai_analytics/code.html">
+<span class="material-symbols-outlined" data-icon="analytics" data-weight="fill">analytics</span>
+<span class="text-label-sm font-label-sm-mobile mt-1 hidden">Analytics</span> <!-- Visually hidden but active conceptually -->
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all scale-90 active:scale-100 rounded-lg" href="../cropmandi_ai_alert_center/code.html">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+<span class="text-label-sm font-label-sm-mobile mt-1">Alerts</span>
+</a>
+</nav>
+<!-- API JavaScript -->
+<script src="../js/api.js"></script>
+<!-- Analytics JavaScript -->
+<script src="../js/analytics.js"></script>
+</body></html>

@@ -1,0 +1,37 @@
+{
+  "representation": "experimental_modelling_only",
+  "source_workbook": "karnataka_daily_coffee_prices_7years.xlsx",
+  "source_modified": false,
+  "inserted_into_production_db": false,
+  "weekend_rows_removed": true,
+  "interpolated": false,
+  "unit_conversion": false,
+  "data_status": "UNVERIFIED_HISTORICAL_COFFEE_DATA",
+  "data_usage": "EXPERIMENTAL_ONLY",
+  "series": {
+    "coffee_arabica_parchment": {
+      "observations": 2000,
+      "start": "2019-01-01",
+      "end": "2026-08-31",
+      "weekdays_only": true
+    },
+    "coffee_arabica_cherry": {
+      "observations": 2000,
+      "start": "2019-01-01",
+      "end": "2026-08-31",
+      "weekdays_only": true
+    },
+    "coffee_robusta_parchment": {
+      "observations": 2000,
+      "start": "2019-01-01",
+      "end": "2026-08-31",
+      "weekdays_only": true
+    },
+    "coffee_robusta_cherry": {
+      "observations": 2000,
+      "start": "2019-01-01",
+      "end": "2026-08-31",
+      "weekdays_only": true
+    }
+  }
+}

@@ -1,0 +1,50 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*serviceAccount*.json
+*service-account*.json
+*-firebase-adminsdk-*.json
+*-firebase-adminsdk*.json
+firebase-adminsdk*.json
+gcloud-service-key.json
+
+# Databases
+*.db
+*.sqlite3
+
+# Testing / IDE
+.pytest_cache/
+.mypy_cache/
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Archives / extracted files
+*.zip
+.DS_Store
+__MACOSX/
+frontend_zip_extract/
+node_modules/
+
+# Generated data
+data/raw/**
+!data/raw/.gitkeep
+data/audit/**
+!data/audit/.gitkeep
+data/reports/**
+!data/reports/.gitkeep
+
+# ML artifacts
+ml/artifacts/**
+!ml/artifacts/.gitkeep
+*.joblib
+*.log

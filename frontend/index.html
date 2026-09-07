@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CropMandi AI - Smart Decisions, Better Returns</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Roboto+Slab:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="custom-utilities">
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .glass-panel-dark {
+      background: rgba(20, 20, 20, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .text-turmeric {
+      color: #EAB308; /* Tailwind yellow-500, close to turmeric */
+    }
+    
+    .text-emerald {
+      color: #10B981; /* Tailwind emerald-500 */
+    }
+
+    .bg-gradient-overlay {
+      background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.2) 100%);
+    }
+    
+    .bottom-gradient-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    }
+
+    .hero-section {
+      min-height: 100vh;
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        min-height: auto;
+        padding-bottom: 2rem;
+      }
+
+      .feature-bar {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .bg-gradient-overlay {
+        background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.5) 100%);
+      }
+    }
+  </style>
+</head>
+<body class="antialiased relative bg-gray-900 text-white overflow-hidden flex flex-col">
+<!-- BEGIN: Background Image with Overlays -->
+<div class="absolute inset-0 z-0">
+<img alt="Smiling Indian farmer in a coffee plantation at sunrise" class="w-full h-full object-cover object-center" src="assests/farmer.png"/>
+<!-- Green tint overlay for agricultural theme -->
+<div class="absolute inset-0 bg-gradient-to-r from-green-900/40 via-green-800/20 to-transparent z-10"></div>
+<!-- Gradient overlay for text readability -->
+<div class="absolute inset-0 bg-gradient-overlay z-20"></div>
+<!-- Bottom gradient for the footer bar -->
+<div class="absolute bottom-0 left-0 right-0 h-64 bottom-gradient-overlay z-20"></div>
+</div>
+<!-- END: Background Image with Overlays -->
+<div class="relative z-20 flex flex-col hero-section w-full px-6 md:px-12 lg:px-24 pt-8 pb-10">
+<!-- BEGIN: Header -->
+<header class="flex justify-between items-center mb-16">
+<!-- Logo -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center p-1">
+<!-- Simplified Leaf Logo representation -->
+<svg class="text-green-600 w-full h-full" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 22C12 22 19 18 19 12C19 6 12 2 12 2C12 2 5 6 5 12C5 18 12 22 12 22Z" fill="currentColor"></path>
+<path d="M12 22V2" stroke="white" stroke-width="2"></path>
+<path d="M12 12C12 12 16 10 16 7" stroke="white" stroke-linecap="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h1 class="text-2xl font-bold tracking-tight leading-none text-white">Crop Mandi</h1>
+<p class="text-xs text-gray-300 font-medium">Smart Decisions, Better Returns</p>
+</div>
+</div>
+<!-- Language Selector -->
+<button class="glass-panel px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 hover:bg-white/20 transition-colors">
+        English
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Main Content Area -->
+<main class="flex-grow flex flex-col justify-center items-start w-full">
+<!-- Hero Text & CTAs -->
+<div class="w-full max-w-2xl flex flex-col items-start pt-6 md:pt-0 z-30">
+<h2 class="text-5xl md:text-7xl font-extrabold leading-[1.1] mb-6 drop-shadow-lg">
+          Know <span class="text-turmeric">Where.</span><br/>
+          Know <span class="text-turmeric">When.</span><br/>
+          Earn <span class="text-turmeric">More.</span>
+</h2>
+<p class="text-lg md:text-xl text-gray-200 mb-10 max-w-md drop-shadow-md">
+          AI-powered market intelligence that helps farmers sell at the right place and the right time.
+        </p>
+<div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+<!-- Primary CTA -->
+<a href="cropmandi_ai_login_register/code.html" class="bg-green-700 hover:bg-green-600 text-white font-semibold py-4 px-8 rounded-full flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(21,128,61,0.5)]">
+            Get Started
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+<!-- Secondary CTA -->
+<a href="cropmandi_ai_dashboard/code.html" class="glass-panel hover:bg-white/20 text-white font-semibold py-4 px-8 rounded-full flex items-center justify-center gap-2 transition-all">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+            Explore Dashboard
+            <svg class="h-4 w-4 ml-1" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</div>
+
+</main>
+<!-- END: Main Content Area -->
+<!-- BEGIN: Features Footer Bar -->
+<footer class="mt-auto pt-10">
+<div class="glass-panel-dark rounded-2xl p-4 md:p-6 w-full max-w-5xl mx-auto shadow-2xl backdrop-blur-xl bg-black/40 border border-white/10 feature-bar">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4 divide-x divide-gray-700/50 min-w-max">
+<!-- Feature 1 -->
+<div class="flex flex-col items-center justify-center text-center px-2">
+<div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-3">
+<svg class="h-5 w-5 text-gray-300" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+<path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<p class="text-xs md:text-sm font-medium text-gray-300 leading-tight">Best APMC<br/>Recommendation</p>
+</div>
+<!-- Feature 2 -->
+<div class="flex flex-col items-center justify-center text-center px-2">
+<div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-3">
+<svg class="h-5 w-5 text-gray-300" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<p class="text-xs md:text-sm font-medium text-gray-300 leading-tight">Price Prediction<br/>&amp; Trends</p>
+</div>
+<!-- Feature 3 -->
+<div class="flex flex-col items-center justify-center text-center px-2">
+<div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-3">
+<svg class="h-5 w-5 text-gray-300" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<p class="text-xs md:text-sm font-medium text-gray-300 leading-tight">Expected Profit<br/>Calculator</p>
+</div>
+<!-- Feature 4 -->
+<div class="flex flex-col items-center justify-center text-center px-2">
+<div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-3">
+<svg class="h-5 w-5 text-gray-300" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<p class="text-xs md:text-sm font-medium text-gray-300 leading-tight">Voice Assistant<br/>Support</p>
+</div>
+<!-- Feature 5: Stripe Integration -->
+<div class="flex flex-col items-center justify-center text-center px-2 col-span-2 md:col-span-1">
+<div class="h-10 flex items-center justify-center mb-3 opacity-80">
+<!-- Simple SVG representation of Stripe logo text -->
+<svg class="h-6 text-white" fill="none" viewbox="0 0 60 25" xmlns="http://www.w3.org/2000/svg">
+<path d="M59.64 12.06c0-6.84-5.22-11.7-12.24-11.7-7.2 0-12.24 4.86-12.24 11.7 0 6.66 5.04 11.7 12.24 11.7 3.6 0 6.84-1.26 9.18-3.42l-2.16-3.78c-1.8 1.62-4.14 2.52-6.84 2.52-4.32 0-7.38-2.88-7.74-7.02h19.8zm-19.8-3.24c.36-3.78 3.24-6.3 7.56-6.3 4.14 0 7.02 2.52 7.38 6.3h-14.94zM24.84 0v23.4h5.4V0h-5.4zM3.42 22.86c-2.16-2.16-3.24-5.22-3.24-8.82 0-3.78 1.08-6.84 3.42-9.18C5.76 2.52 9.18 1.26 13.32 1.26c3.6 0 6.66 1.08 8.82 3.24l-3.24 3.96c-1.44-1.44-3.42-2.16-5.58-2.16-2.16 0-3.96.9-5.22 2.34-1.08 1.26-1.62 3.06-1.62 5.4 0 2.52.54 4.32 1.62 5.58 1.26 1.44 3.06 2.34 5.22 2.34 2.34 0 4.32-.72 5.76-2.16l3.24 3.96c-2.34 2.16-5.58 3.42-9.18 3.42-4.14.18-7.56-1.08-9.9-3.42z" fill="currentColor"></path>
+</svg>
+</div>
+<p class="text-[10px] md:text-xs font-medium text-gray-400 leading-tight">Secure Payments<br/>with Stripe</p>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: Features Footer Bar -->
+</div>
+<script src="js/api.js"></script>
+</body></html>

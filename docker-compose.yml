@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: cropmandi
+      POSTGRES_PASSWORD: cropmandi
+      POSTGRES_DB: cropmandi
+    ports:
+      - "5432:5432"
+    volumes:
+      - cropmandi_pg:/var/lib/postgresql/data
+
+volumes:
+  cropmandi_pg:

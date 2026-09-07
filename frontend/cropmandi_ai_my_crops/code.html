@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Crops - CropMandi AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Roboto+Slab:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#722000",
+                        "surface-container-low": "#f4f4f0",
+                        "primary-fixed-dim": "#8bd6b6",
+                        "surface-container-highest": "#e3e2df",
+                        "on-background": "#1b1c1a",
+                        "on-surface-variant": "#3f4944",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dbdad6",
+                        "surface-tint": "#1b6b51",
+                        "on-primary-fixed-variant": "#00513b",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#a6f2d1",
+                        "on-tertiary-fixed": "#390c00",
+                        "on-primary-fixed": "#002116",
+                        "on-secondary-container": "#6f5100",
+                        "secondary-fixed-dim": "#f9bd22",
+                        "inverse-on-surface": "#f2f1ed",
+                        "on-tertiary-fixed-variant": "#832600",
+                        "primary": "#004532",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#faf9f5",
+                        "outline-variant": "#bec9c2",
+                        "background": "#faf9f5",
+                        "surface": "#faf9f5",
+                        "surface-variant": "#e3e2df",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#6f7973",
+                        "tertiary-fixed": "#ffdbd0",
+                        "secondary-container": "#ffc329",
+                        "surface-container-high": "#e9e8e4",
+                        "on-primary-container": "#8bd6b7",
+                        "inverse-surface": "#2f312e",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "surface-container": "#efeeea",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-tertiary-container": "#ffb79f",
+                        "inverse-primary": "#8bd6b6",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#992e00",
+                        "secondary-fixed": "#ffdf9f",
+                        "secondary": "#795900",
+                        "on-surface": "#1b1c1a",
+                        "on-secondary-fixed": "#261a00",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "primary-container": "#065f46"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "panel-padding": "20px",
+                        "gutter": "16px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Roboto"],
+                        "data-tabular": ["Roboto"],
+                        "label-sm": ["Roboto"],
+                        "headline-md": ["Roboto Slab"],
+                        "headline-xl": ["Roboto Slab"],
+                        "body-lg": ["Roboto"],
+                        "headline-lg": ["Roboto Slab"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "data-tabular": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+        
+        .card-shadow {
+            box-shadow: 0 8px 16px rgba(194, 65, 12, 0.04), 0 2px 4px rgba(0, 69, 50, 0.04);
+        }
+        
+        .card-hover:hover {
+            box-shadow: 0 16px 32px rgba(194, 65, 12, 0.08), 0 4px 8px rgba(0, 69, 50, 0.06);
+            transform: translateY(-4px);
+        }
+        
+        .pill-sell {
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pill-hold {
+            box-shadow: 0 0 12px rgba(255, 195, 41, 0.4);
+        }
+        
+        .pill-wait {
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .soft-inset {
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+        }
+
+        .crop-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .crop-card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .crop-card-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- Desktop Sidebar (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col h-full py-panel-padding bg-primary dark:bg-primary fixed left-0 top-0 w-[280px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] z-40">
+<div class="px-6 mb-8 flex items-center gap-4">
+<img alt="User profile photo" class="w-12 h-12 rounded-full object-cover shadow-sm bg-surface-container-highest" data-alt="A highly detailed 3D render of an abstract, organic shape resembling a growing seedling or geometric leaf. Rendered in vivid emerald green and soft warm gold tones against a pure white background. The lighting is studio-quality, casting soft, realistic shadows, evoking a sense of premium agricultural technology and modern intelligence. The style is clean, hyper-tactile, and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZVgwgtias4-wCnOgiGwFv_nebo43PcJSWihyQA3qeQ_859SrSQ5BXu5nzCKTYunB-cWESzmbOhEMhGY3N5FIUE5ZYOv-gcBTc_IT0duZlfkyNPCs-M6QpbiEGRzM866Hc84tQz-iG9CMcfot8_WhqDvW3-CNKXwbGY7Q2JsCITsZJXzue3gys6CNkoYCho7qfMDPZYm3YuOEZUiC1UAnjG5ojms_8RUhsPcsRvXUgiMx8uiiXxBWu"/>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-primary">CropMandi AI</h1>
+<p class="text-label-sm font-label-sm text-primary-fixed-dim opacity-80 mt-1">Agricultural Intelligence</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out rounded-lg group" href="../cropmandi_ai_dashboard/code.html">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">dashboard</span>
+<span class="text-body-md font-body-md font-medium">Dashboard</span>
+</a>
+<!-- My Crops (Active) -->
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container shadow-[inset_4px_4px_8px_rgba(0,0,0,0.3)] rounded-lg mx-2 px-4 py-3 transition-all scale-95 duration-150 ease-in-out" href="../cropmandi_ai_my_crops/code.html">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">agriculture</span>
+<span class="text-body-md font-body-md font-bold">My Crops</span>
+</a>
+<!-- Analytics -->
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out rounded-lg group" href="../cropmandi_ai_analytics/code.html">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">analytics</span>
+<span class="text-body-md font-body-md font-medium">Analytics</span>
+</a>
+<!-- Farm Calendar -->
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out rounded-lg group" href="../cropmandi_ai_farm_calendar/code.html">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">calendar_today</span>
+<span class="text-body-md font-body-md font-medium">Farm Calendar</span>
+</a>
+<!-- Alerts -->
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out rounded-lg group" href="../cropmandi_ai_alert_center/code.html">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">notifications</span>
+<span class="text-body-md font-body-md font-medium">Alerts</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all scale-95 duration-150 ease-in-out rounded-lg group" href="../cropmandi_ai_settings/code.html">
+<span class="material-symbols-outlined text-[24px] group-hover:scale-110 transition-transform">settings</span>
+<span class="text-body-md font-body-md font-medium">Settings</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full py-3 px-4 bg-tertiary text-on-tertiary rounded-lg text-body-md font-body-md font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">mic</span>
+                Voice Assistant
+            </button>
+<a class="flex items-center gap-3 text-on-primary-container opacity-60 px-4 py-3 hover:opacity-100 transition-all mt-4" href="../cropmandi_ai_login_register/code.html">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="text-label-sm font-label-sm">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-[280px] flex flex-col min-h-screen pb-24 md:pb-0 relative">
+<!-- Top App Bar (Desktop) -->
+<header class="hidden md:flex justify-between items-center px-container-margin h-16 fixed top-0 right-0 w-[calc(100%-280px)] bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl shadow-sm z-30">
+<div class="flex-1 flex items-center">
+<!-- Search could go here -->
+</div>
+<nav class="flex items-center gap-8 mr-8">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors active:opacity-70" href="../cropmandi_ai_dashboard/code.html">Market</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors active:opacity-70" href="#">Weather</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors active:opacity-70" href="#">Help</a>
+</nav>
+<div class="flex items-center gap-4 text-primary">
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors"><span class="material-symbols-outlined">language</span></button>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 p-container-margin md:mt-16 pt-8 md:pt-container-margin max-w-7xl mx-auto w-full">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div>
+<h2 class="text-headline-xl font-headline-xl text-primary mb-2 tracking-tight">My Crops</h2>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Manage your inventory and track market values.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-body-md font-bold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center gap-2 whitespace-nowrap self-start md:self-auto" id="add-crop-button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    Add New Crop
+                </button>
+</div>
+<!-- Summary Metrics Bento -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-xl card-shadow border-t border-white/50 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-xl"></div>
+<div class="flex items-center gap-3 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-primary bg-primary-fixed-dim/20 p-2 rounded-lg">inventory_2</span>
+<h3 class="text-label-sm font-label-sm uppercase tracking-wider text-outline">Total Crops</h3>
+</div>
+<div class="text-headline-lg font-headline-lg text-on-background" id="total-crops">0 <span class="text-body-md font-body-md text-on-surface-variant font-normal">crops</span></div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl card-shadow border-t border-white/50 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary/5 rounded-full blur-xl"></div>
+<div class="flex items-center gap-3 text-on-surface-variant mb-4">
+<span class="material-symbols-outlined text-tertiary bg-tertiary-fixed-dim/20 p-2 rounded-lg">scale</span>
+<h3 class="text-label-sm font-label-sm uppercase tracking-wider text-outline">Total Quantity</h3>
+</div>
+<div class="text-headline-lg font-headline-lg text-on-background" id="total-quantity">0 <span class="text-body-md font-body-md text-on-surface-variant font-normal">qtl</span></div>
+</div>
+</div>
+<!-- Crop Gallery Grid -->
+<div class="crop-card-grid" id="crop-gallery">
+<!-- Dynamic crop cards will be rendered here by JavaScript -->
+</div>
+</main>
+<!-- Mobile Bottom Navigation (Hidden on Desktop) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 rounded-t-xl md:hidden bg-surface/90 dark:bg-surface-container-lowest/90 backdrop-blur-[20px] border-t border-outline-variant/20 shadow-[0_-4px_20px_rgba(114,32,0,0.08)] flex justify-around items-center px-4 py-2">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all scale-90 active:scale-100" href="../cropmandi_ai_dashboard/code.html">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-label-sm font-label-sm mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full p-3 shadow-md transition-all scale-90 active:scale-100 -mt-4" href="../cropmandi_ai_my_crops/code.html">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">grass</span>
+<span class="text-label-sm font-label-sm mt-1">Crops</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all scale-90 active:scale-100" href="#">
+<span class="material-symbols-outlined text-[24px]">mic</span>
+<span class="text-label-sm font-label-sm mt-1">Voice</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all scale-90 active:scale-100 relative" href="../cropmandi_ai_alert_center/code.html">
+<span class="material-symbols-outlined text-[24px]">notifications_active</span>
+<span class="text-label-sm font-label-sm mt-1">Alerts</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</a>
+</nav>
+<!-- Add New Crop Modal -->
+<div id="add-crop-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+<div class="bg-surface-container-lowest rounded-xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto border border-outline-variant/20">
+<div class="p-6 border-b border-outline-variant/20">
+<div class="flex justify-between items-center">
+<h3 class="text-headline-md font-headline-md text-on-background">Add New Crop</h3>
+<button id="modal-close-button" class="p-2 hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">close</span>
+</button>
+</div>
+</div>
+<div class="p-6 space-y-5">
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Commodity</label>
+<div class="relative rounded-lg bg-surface-container-low border border-outline-variant/30 focus-within:border-primary transition-colors">
+<select class="w-full bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-background p-3 appearance-none" id="modal-crop-select">
+<option value="">Select commodity...</option>
+<option value="coffee">Coffee</option>
+<option value="pepper">Black Pepper</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Variety</label>
+<div class="relative rounded-lg bg-surface-container-low border border-outline-variant/30 focus-within:border-primary transition-colors">
+<select class="w-full bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-background p-3 appearance-none" id="modal-variety-select">
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Quantity (Quintals)</label>
+<div class="relative rounded-lg bg-surface-container-low border border-outline-variant/30 focus-within:border-primary transition-colors">
+<input class="w-full bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-background p-3" type="number" id="modal-quantity-input" min="1" step="0.1" placeholder="Enter quantity"/>
+</div>
+</div>
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Location</label>
+<div class="relative rounded-lg bg-surface-container-low border border-outline-variant/30 focus-within:border-primary transition-colors">
+<select class="w-full bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-background p-3 appearance-none" id="modal-location-select">
+<option value="">Select location...</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-outline pointer-events-none">expand_more</span>
+</div>
+<p class="text-label-sm font-label-sm text-primary mt-2 hidden" id="modal-location-loading">Loading locations...</p>
+<p class="text-label-sm font-label-sm text-error mt-2 hidden" id="modal-location-error"></p>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant/20 flex gap-3 justify-end">
+<button class="px-6 py-2.5 rounded-lg text-label-sm font-label-sm text-on-surface-variant hover:bg-surface-container transition-colors" id="modal-cancel-button">Cancel</button>
+<button class="px-6 py-2.5 rounded-lg text-label-sm font-label-sm bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md" id="modal-save-button">Add Crop</button>
+</div>
+</div>
+</div>
+<!-- Delete Confirmation Modal -->
+<div id="delete-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+<div class="bg-surface-container-lowest rounded-xl shadow-2xl max-w-sm w-full border border-outline-variant/20">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-[24px]">warning</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-background">Delete Crop</h3>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6" id="delete-modal-message">Are you sure you want to remove this crop from your inventory?</p>
+<div class="flex gap-3 justify-end">
+<button class="px-6 py-2.5 rounded-lg text-label-sm font-label-sm text-on-surface-variant hover:bg-surface-container transition-colors" id="delete-cancel-button">Cancel</button>
+<button class="px-6 py-2.5 rounded-lg text-label-sm font-label-sm bg-error text-on-error hover:bg-error-container hover:text-on-error-container transition-colors shadow-md" id="delete-confirm-button">Delete</button>
+</div>
+</div>
+</div>
+</div>
+<script src="../js/api.js"></script>
+<script src="../js/my-crops.js"></script>
+</body></html>
