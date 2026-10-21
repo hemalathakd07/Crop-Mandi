@@ -194,13 +194,17 @@
       unitEl.textContent = unitLabel(payload.unit);
     }
     if (methodEl) {
-      methodEl.textContent = "";
+      methodEl.textContent = payload.method
+        ? "Method: " + String(payload.method).replace(/_/g, " ")
+        : "";
     }
     if (modelStatusEl) {
-      modelStatusEl.textContent = "";
+      modelStatusEl.textContent = payload.model_status
+        ? "Model status: " + String(payload.model_status).replace(/_/g, " ")
+        : "";
     }
     if (noteEl) {
-      noteEl.textContent = "";
+      noteEl.textContent = payload.note || "";
     }
     if (warningEl) {
       warningEl.textContent = "";

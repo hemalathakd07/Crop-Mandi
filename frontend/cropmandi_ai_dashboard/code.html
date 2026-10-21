@@ -196,11 +196,11 @@
 </a>
 </nav>
 <div class="px-6 mt-auto">
-<button class="w-full py-3 bg-secondary text-on-secondary rounded-lg font-label-sm text-label-sm flex items-center justify-center gap-2 hover:bg-secondary/90 transition-colors shadow-md">
-<span class="material-symbols-outlined">mic</span>
+<button class="w-full py-2 text-primary-fixed-dim rounded-lg text-xs font-semibold flex items-center justify-center gap-2 border border-white/20 hover:bg-white/10" type="button">
+<span class="material-symbols-outlined text-[18px]">mic</span>
                 Voice Assistant
             </button>
-<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all mx-2 rounded-lg duration-150 ease-in-out mt-2" href="../cropmandi_ai_login_register/code.html">
+<a class="flex items-center gap-3 text-on-primary-container opacity-80 px-4 py-3 hover:bg-primary-container/50 hover:text-on-primary-container transition-all mx-2 rounded-lg duration-150 ease-in-out mt-3 border-t border-white/15" href="../cropmandi_ai_login_register/code.html">
 <span class="material-symbols-outlined">logout</span>
 <span class="font-label-sm text-label-sm">Logout</span>
 </a>
@@ -208,7 +208,7 @@
 </aside>
 <!-- Bottom Navigation (Mobile) -->
 <nav class="fixed bottom-0 left-0 w-full z-50 rounded-t-xl md:hidden bg-surface/90 backdrop-blur-[20px] border-t border-outline-variant/20 shadow-[0_-4px_20px_rgba(114,32,0,0.08)] flex justify-around items-center px-4 py-2">
-<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full p-3 shadow-md scale-90 active:scale-100 transition-transform" href="../cropmandi_ai_dashboard/code.html">
+<a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-full p-3 shadow-md" href="../cropmandi_ai_dashboard/code.html">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
 <span class="text-label-sm font-label-sm mt-1">Home</span>
 </a>
@@ -216,7 +216,7 @@
 <span class="material-symbols-outlined">grass</span>
 <span class="text-label-sm font-label-sm mt-1">Crops</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all rounded-full scale-90 active:scale-100 transition-transform relative top-[-10px] bg-primary text-on-primary shadow-lg border-2 border-surface" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-all rounded-full" href="#">
 <span class="material-symbols-outlined">mic</span>
 <span class="text-label-sm font-label-sm mt-1">Voice</span>
 </a>
@@ -226,17 +226,19 @@
 </a>
 </nav>
 <!-- Main Content Canvas -->
-<main class="md:ml-[280px] pt-4 md:pt-20 px-4 md:px-container-margin pb-24 md:pb-12 min-h-screen">
-<!-- Header Section -->
-<header class="mb-8">
-<h2 class="text-headline-xl font-headline-xl text-on-background mb-1" id="dash-greeting">Good morning, Hemalatha</h2>
-<div class="flex items-center text-on-surface-variant gap-2 text-body-md font-body-md">
-<span class="material-symbols-outlined text-[18px]">location_on</span>
-<span id="dash-location-label">Sakleshpur</span>
-</div>
+<main class="md:ml-[280px] pt-4 md:pt-20 px-4 md:px-container-margin pb-24 md:pb-8 min-h-screen">
+<header class="mb-3">
+<h2 class="text-xl font-semibold text-on-background" id="dash-greeting">Good morning, Hemalatha</h2>
+<p class="text-sm font-semibold text-primary flex flex-wrap items-center gap-1 mt-1">
+<span id="dash-location-label">—</span>
+<span class="text-outline" aria-hidden="true">→</span>
+<span id="dash-rec-crop">—</span>
+<span class="text-outline" aria-hidden="true">→</span>
+<span id="dash-rec-variety">—</span>
+</p>
 </header>
 <!-- Crop Controls -->
-<section class="soft-3d-card p-4 md:p-6 mb-8 flex flex-col md:flex-row gap-4 items-end">
+<section class="soft-3d-card p-3 md:p-4 mb-4 flex flex-col md:flex-row gap-3 items-end">
 <div class="w-full md:flex-1">
 <label class="block text-label-sm font-label-sm text-on-surface-variant mb-2">Commodity</label>
 <div class="relative soft-inset rounded-lg bg-surface-container-low border focus-within:border-primary border-transparent transition-colors">
@@ -281,146 +283,105 @@
                 </button>
 </div>
 </section>
-<!-- Bento Grid Layout -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-8">
-<!-- Price Outlook -->
-<div class="md:col-span-8 soft-3d-card p-6 md:p-8 relative overflow-hidden flex flex-col justify-center">
-<h3 class="text-headline-lg font-headline-lg text-on-background mb-4" id="dash-rec-title">Price Outlook</h3>
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-<div class="bg-surface-container-low p-4 rounded-lg border border-outline-variant/40 flex flex-col justify-center min-h-[132px]">
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-2">Current price</span>
-<span class="text-headline-md font-headline-md text-primary block" id="dash-latest-price">…</span>
-<span class="text-label-sm font-label-sm text-on-surface-variant mt-1" id="dash-latest-unit"></span>
-</div>
-<div class="bg-surface-container-low p-4 rounded-lg border border-outline-variant/40 flex flex-col justify-center min-h-[132px]">
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-2">Crop / Variety</span>
-<span class="text-body-md font-body-md text-on-background font-semibold block" id="dash-rec-crop">—</span>
-<span class="text-body-md font-body-md text-on-background block mt-1" id="dash-rec-variety">—</span>
-</div>
-<div class="bg-surface-container-low p-4 rounded-lg border border-outline-variant/40 flex flex-col justify-center min-h-[132px]">
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-2">Best APMC</span>
-<span class="text-body-md font-body-md text-on-background font-bold block" id="dash-best-apmc">—</span>
-<span class="text-headline-md font-headline-md text-primary block mt-1" id="dash-best-apmc-price"></span>
-</div>
-</div>
 <p class="hidden" id="dash-rec-body"></p>
 <p class="hidden" id="dash-rec-location"></p>
 <p class="hidden" id="dash-rec-predicted"></p>
-<p class="hidden" id="dash-latest-meta"></p>
-<p class="hidden" id="dash-source-note"></p>
-<div class="hidden" id="dash-rec-confidence"></div>
+<p class="hidden" id="dash-rec-confidence"></p>
+<h3 class="hidden" id="dash-rec-title">Price Outlook</h3>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+<div class="soft-3d-card p-3 border border-primary/20">
+<span class="text-[11px] font-semibold uppercase tracking-wide text-primary block">Current price</span>
+<span class="text-[11px] font-semibold text-on-surface-variant block mt-1" id="dash-price-status"></span>
+<span class="text-2xl font-semibold text-primary block mt-1" id="dash-latest-price">…</span>
+<span class="text-xs text-on-surface-variant" id="dash-latest-unit"></span>
 </div>
-<!-- Side Panels Stack -->
-<div class="md:col-span-4 flex flex-col gap-gutter">
-<!-- Weather Impact Panel -->
-<div class="soft-3d-card p-6 flex-1 flex flex-col justify-center relative overflow-hidden">
-<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-secondary-fixed/20 rounded-full blur-2xl pointer-events-none"></div>
-<div class="flex items-center justify-between mb-4">
-<h4 class="text-headline-md font-headline-md text-on-background">Weather Impact</h4>
-<span class="material-symbols-outlined text-secondary-fixed-dim text-[32px]" style="font-variation-settings: 'FILL' 1;">light_mode</span>
+<div class="soft-3d-card p-3">
+<span class="text-[11px] font-semibold uppercase tracking-wide text-on-surface-variant block">Top observed centre</span>
+<span class="text-sm font-semibold text-on-background block mt-2 leading-snug" id="dash-best-apmc">—</span>
+<span class="text-sm text-primary font-semibold block mt-1" id="dash-best-apmc-price"></span>
 </div>
-<div class="flex items-baseline gap-2 mb-2">
-<span class="text-headline-xl font-headline-xl text-on-background" id="dash-weather-temp"></span>
-<span class="text-body-md font-body-md text-on-surface-variant" id="dash-weather-desc">Weather unavailable</span>
+<div class="soft-3d-card p-3">
+<span class="text-[11px] font-semibold uppercase tracking-wide text-on-surface-variant block">Price date</span>
+<span class="text-sm font-semibold text-on-background block mt-2" id="dash-price-date">—</span>
+<span class="text-xs text-on-surface-variant block mt-1" id="dash-latest-meta"></span>
 </div>
-<div class="flex items-center gap-4 text-data-tabular font-data-tabular text-on-surface-variant mb-4">
-<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">water_drop</span> <span id="dash-weather-humidity"></span></span>
-</div>
-<div class="bg-primary/10 text-primary p-3 rounded-lg text-label-sm font-label-sm border border-primary/20 flex items-start gap-2">
-<span class="material-symbols-outlined text-[18px]">info</span>
-<span id="dash-weather-note">Weather unavailable</span>
-</div>
-</div>
-<!-- Action Panel -->
-<div class="soft-3d-card p-6 flex-1 flex flex-col justify-center gap-3">
-<button class="w-full bg-surface-container-high text-on-surface py-3 px-4 rounded-lg text-label-sm font-label-sm hover:bg-surface-variant transition-colors flex items-center justify-center gap-2 border border-outline-variant/30" id="dash-set-alert" type="button">
-<span class="material-symbols-outlined">notifications_active</span> Set Alert
-                    </button>
-<button class="w-full bg-surface-container-low text-primary py-3 px-4 rounded-lg text-label-sm font-label-sm hover:bg-primary/5 transition-colors flex items-center justify-center gap-2 border border-primary/30" id="dash-save-prediction" type="button">
-<span class="material-symbols-outlined">bookmark</span> Save Prediction
-                    </button>
-<p class="text-label-sm font-label-sm text-primary hidden" id="dash-action-feedback"></p>
+<div class="soft-3d-card p-3">
+<span class="text-[11px] font-semibold uppercase tracking-wide text-on-surface-variant block">Source</span>
+<span class="text-sm font-semibold text-on-background block mt-2 leading-snug" id="dash-price-source">—</span>
+<span class="text-xs text-on-surface-variant block mt-1" id="dash-source-note"></span>
 </div>
 </div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3 items-stretch">
+<div class="soft-3d-card p-4 h-full border-l-4 border-primary flex flex-col">
+<p class="text-[11px] font-semibold uppercase tracking-wide text-primary">Latest observed</p>
+<p class="text-xs text-on-surface-variant mt-0.5">Recorded market price</p>
+<p class="text-2xl font-semibold text-primary mt-2" id="dash-est-latest-price">…</p>
+<p class="text-xs text-on-surface-variant mt-auto pt-3">Date <span id="dash-est-latest-date">—</span> · <span id="dash-est-unit">—</span></p>
 </div>
-<!-- Next Session Estimate -->
-<div class="md:col-span-12 soft-3d-card p-6 md:p-8 mb-8">
-<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-4">
-<div>
-<h3 class="text-headline-md font-headline-md text-on-background">Next Session Estimate</h3>
-<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Predicted price for the selected crop, variety, and location.</p>
-</div>
-<div class="text-right">
-<p class="text-label-sm font-label-sm text-on-surface-variant">Series</p>
-<p class="text-body-md font-body-md text-on-background font-semibold" id="dash-est-series">—</p>
-</div>
-</div>
-<p class="text-label-sm font-label-sm text-on-surface-variant mb-4" id="dash-est-location"></p>
-<p class="text-label-sm font-label-sm text-primary mb-4 hidden" id="dash-est-status">Loading next-session estimate...</p>
-<p class="text-label-sm font-label-sm text-error mb-4 hidden" id="dash-est-error"></p>
-<div id="dash-est-body">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-<div class="bg-surface-container-low p-4 rounded-lg soft-inset">
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Latest observed</span>
-<span class="text-headline-md font-headline-md text-primary block" id="dash-est-latest-price">…</span>
-</div>
-<div class="bg-surface-container-low p-4 rounded-lg soft-inset">
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Next-session estimate</span>
-<span class="text-headline-md font-headline-md text-on-background block" id="dash-est-next-price">…</span>
+<div class="rounded-xl border border-dashed border-outline p-4 h-full bg-surface flex flex-col" id="dash-est-body">
+<p class="text-[11px] font-semibold uppercase tracking-wide text-on-surface-variant">Next-session estimate</p>
+<p class="text-xs text-on-surface-variant mt-0.5">Baseline output, not an observed price</p>
+<p class="text-2xl font-semibold text-on-background mt-2" id="dash-est-next-price">…</p>
+<p class="text-xs text-on-surface-variant mt-2">Target <span id="dash-est-target">—</span></p>
+<p class="text-xs text-on-background mt-2" id="dash-est-method"></p>
+<p class="text-xs text-on-surface-variant" id="dash-est-model-status"></p>
+<p class="text-xs text-on-surface-variant mt-1" id="dash-est-note"></p>
+<p class="hidden" id="dash-est-warning"></p>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-<div>
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Latest observation</span>
-<span class="text-body-md font-body-md text-on-background font-semibold block" id="dash-est-latest-date">—</span>
+<p class="text-xs text-on-surface-variant mb-1"><span id="dash-est-series">—</span> · <span id="dash-est-location"></span></p>
+<p class="text-xs text-primary mb-3 hidden" id="dash-est-status">Loading next-session estimate...</p>
+<p class="text-xs text-error mb-3 hidden" id="dash-est-error"></p>
+<div class="soft-3d-card p-3 mb-4 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3">
+<div class="sm:flex-1 min-w-0">
+<div class="flex items-center justify-between gap-2">
+<p class="text-sm font-semibold text-on-background">Weather</p>
+<p class="text-sm font-semibold" id="dash-weather-temp"></p>
 </div>
-<div>
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Target session</span>
-<span class="text-body-md font-body-md text-on-background font-semibold block" id="dash-est-target">—</span>
+<p class="text-xs text-on-surface-variant" id="dash-weather-desc">Weather unavailable</p>
+<p class="text-xs text-on-surface-variant" id="dash-weather-humidity"></p>
+<p class="text-xs text-primary mt-1" id="dash-weather-note">Weather unavailable</p>
 </div>
-<div>
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Unit</span>
-<span class="text-body-md font-body-md text-on-background font-semibold block" id="dash-est-unit">—</span>
+<div class="flex gap-2 sm:w-56">
+<button class="flex-1 bg-surface-container-high text-on-surface py-2 px-2 rounded-lg text-xs font-semibold border border-outline-variant/30" id="dash-set-alert" type="button">Set Alert</button>
+<button class="flex-1 bg-surface-container-low text-primary py-2 px-2 rounded-lg text-xs font-semibold border border-primary/30" id="dash-save-prediction" type="button">Save</button>
 </div>
-</div>
-</div>
+<p class="text-xs text-primary hidden sm:w-full" id="dash-action-feedback"></p>
 </div>
 <!-- Latest Prices Section -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-8">
-<!-- Market Comparison Table -->
-<div class="md:col-span-12 soft-3d-card p-0 overflow-hidden flex flex-col">
-<div class="p-6 border-b border-outline-variant/20 bg-surface/50">
-<h3 class="text-headline-md font-headline-md text-on-background">Latest prices</h3>
-<p class="text-label-sm font-label-sm text-on-surface-variant mt-1" id="dash-table-note"></p>
-<p class="text-label-sm font-label-sm text-primary mt-1 hidden" id="dash-table-status">Loading market prices...</p>
+<div class="soft-3d-card overflow-hidden mb-4">
+<div class="px-4 py-3 border-b border-outline-variant/20">
+<h3 class="text-base font-semibold text-on-background">Market comparison</h3>
+<p class="text-xs text-on-surface-variant" id="dash-table-note"></p>
+<p class="text-xs text-primary hidden" id="dash-table-status">Loading market prices...</p>
 </div>
-<div class="overflow-x-auto flex-1 p-2">
-<table class="w-full text-left border-collapse">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse text-sm">
 <thead>
-<tr class="border-b border-outline-variant/20">
-<th class="p-4 text-label-sm font-label-sm text-on-surface-variant font-normal" id="dash-col-series">Series</th>
-<th class="p-4 text-label-sm font-label-sm text-on-surface-variant font-normal text-right" id="dash-col-latest">Latest (Rs./50 Kg)</th>
-<th class="p-4 text-label-sm font-label-sm text-on-surface-variant font-normal text-right" id="dash-col-asof">As of</th>
+<tr class="border-b border-outline-variant/20 bg-surface-container-low">
+<th class="px-3 py-2 text-xs font-semibold text-on-surface-variant" id="dash-col-series">Centre</th>
+<th class="px-3 py-2 text-xs font-semibold text-on-surface-variant text-right" id="dash-col-latest">Price</th>
+<th class="px-3 py-2 text-xs font-semibold text-on-surface-variant text-right" id="dash-col-asof">Date</th>
+<th class="px-3 py-2 text-xs font-semibold text-on-surface-variant">Source</th>
 </tr>
 </thead>
-<tbody class="text-data-tabular font-data-tabular" id="dash-price-rows">
+<tbody id="dash-price-rows">
 <tr>
-<td class="p-6 text-center text-on-surface-variant" colspan="3">Loading market prices...</td>
+<td class="px-3 py-4 text-center text-on-surface-variant" colspan="4">Loading market prices...</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="p-6 border-t border-outline-variant/20 bg-surface/50">
-<p class="text-label-sm font-label-sm text-on-surface-variant mb-2">Market Centres</p>
-<p class="text-label-sm font-label-sm text-on-surface-variant mb-2" id="dash-centres-location"></p>
-<ul class="space-y-1 text-body-md font-body-md text-on-background" id="dash-centres"></ul>
-</div>
+<div class="px-4 py-3 border-t border-outline-variant/20">
+<p class="text-xs font-semibold text-on-surface-variant">Mapped centres</p>
+<p class="text-xs text-on-surface-variant" id="dash-centres-location"></p>
+<ul class="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-1 text-xs text-on-background" id="dash-centres"></ul>
 </div>
 </div>
 <!-- Cold Storage -->
-<div class="soft-3d-card p-6 md:p-8 mb-8">
-<div class="mb-4">
-<h3 class="text-headline-md font-headline-md text-on-background" id="dash-storage-heading">Cold Storage</h3>
+<div class="soft-3d-card p-4 mb-4">
+<div class="mb-3">
+<h3 class="text-base font-semibold text-on-background" id="dash-storage-heading">Cold Storage</h3>
 <p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Uses the location selected above. Nearby facilities are labelled when they are not in that village. Availability is never assumed.</p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end mb-4">
@@ -452,31 +413,29 @@
 <p class="text-label-sm font-label-sm text-error mb-2 hidden" id="dash-storage-error"></p>
 <p class="text-label-sm font-label-sm text-on-surface-variant mb-2" id="dash-storage-count"></p>
 <p class="text-label-sm font-label-sm text-on-surface-variant mb-4" id="dash-storage-routing"></p>
-<ul class="space-y-3" id="dash-storage-list"></ul>
+<ul class="grid grid-cols-1 lg:grid-cols-2 gap-3" id="dash-storage-list"></ul>
 </div>
-<!-- Demo Payment -->
-<div class="soft-3d-card p-6 md:p-8 mb-8">
-<div class="mb-4">
-<h3 class="text-headline-md font-headline-md text-on-background">Demo Payment — Razorpay Test Mode</h3>
-<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Uses crop and quantity from the Cold Storage section above. Amount is a fixed demo value, not a market price.</p>
+<div class="rounded-xl border border-outline-variant/50 bg-surface-container-low p-4 mb-4">
+<div class="mb-3">
+<h3 class="text-sm font-semibold text-on-surface-variant">Demo Payment — Razorpay Test Mode</h3>
+<p class="text-xs text-on-surface-variant mt-1">Uses crop and quantity from the Cold Storage section above. Amount is a fixed demo value, not a market price.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-<div class="bg-surface-container-low p-4 rounded-lg soft-inset">
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Crop</span>
-<span class="text-body-md font-body-md text-on-background font-semibold block">From Cold Storage crop selector</span>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+<div>
+<span class="text-xs text-on-surface-variant block">Crop</span>
+<span class="text-sm text-on-background font-semibold">From Cold Storage crop selector</span>
 </div>
-<div class="bg-surface-container-low p-4 rounded-lg soft-inset">
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Quantity (kg)</span>
-<span class="text-body-md font-body-md text-on-background font-semibold block">From Cold Storage quantity (default 10 kg if blank)</span>
+<div>
+<span class="text-xs text-on-surface-variant block">Quantity (kg)</span>
+<span class="text-sm text-on-background font-semibold">From Cold Storage quantity (default 10 kg if blank)</span>
 </div>
-<div class="bg-surface-container-low p-4 rounded-lg soft-inset">
-<span class="text-label-sm font-label-sm text-on-surface-variant block mb-1">Amount</span>
-<span class="text-headline-md font-headline-md text-primary block">₹100</span>
-<span class="text-label-sm font-label-sm text-on-surface-variant">Fixed demo amount</span>
+<div>
+<span class="text-xs text-on-surface-variant block">Amount</span>
+<span class="text-sm font-semibold text-on-background">₹100 · fixed demo amount</span>
 </div>
 </div>
 <div class="flex flex-wrap gap-3 items-center">
-<button class="bg-primary text-on-primary py-3 px-4 rounded-lg text-label-sm font-label-sm shadow-md hover:bg-primary-container hover:text-on-primary-container transition-all" id="dash-pay-button" type="button">Pay ₹100 (Test Mode)</button>
+<button class="border border-outline text-on-surface py-2 px-3 rounded-lg text-xs font-semibold hover:bg-white" id="dash-pay-button" type="button">Pay ₹100 (Test Mode)</button>
 </div>
 <p class="text-label-sm font-label-sm text-primary mt-4 hidden" id="dash-pay-status"></p>
 <p class="text-label-sm font-label-sm text-error mt-4 hidden" id="dash-pay-error"></p>
@@ -487,9 +446,9 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js" onerror="window.__razorpayScriptFailed=true"></script>
 <script src="../js/api.js?v=pay-rzp-1"></script>
 <script src="../js/auth.js"></script>
-<script src="../js/dashboard-latest.js"></script>
-<script src="../js/dashboard-estimate.js"></script>
+<script src="../js/dashboard-latest.js?v=ui-3"></script>
+<script src="../js/dashboard-estimate.js?v=ui-1"></script>
 <script src="../js/dashboard-ui.js"></script>
-<script src="../js/dashboard-storage.js?v=cs-1"></script>
+<script src="../js/dashboard-storage.js?v=ui-1"></script>
 <script src="../js/dashboard-payment.js?v=pay-rzp-1"></script>
 </body></html>

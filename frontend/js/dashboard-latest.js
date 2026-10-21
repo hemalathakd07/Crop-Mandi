@@ -141,7 +141,7 @@
     }
     if (isLoading) {
       tableBody.innerHTML =
-        '<tr><td colspan="3" class="p-6 text-center text-on-surface-variant">' +
+        '<tr><td colspan="4" class="px-3 py-4 text-center text-on-surface-variant">' +
         LOADING_MESSAGE +
         "</td></tr>";
       latestPriceEl.textContent = "…";
@@ -155,7 +155,7 @@
 
   function showError(message) {
     tableBody.innerHTML =
-      '<tr><td colspan="3" class="p-6 text-center text-error">' +
+      '<tr><td colspan="4" class="px-3 py-4 text-center text-error">' +
       message +
       "</td></tr>";
     latestPriceEl.textContent = "Data unavailable";
@@ -171,7 +171,7 @@
 
   function showEmpty() {
     tableBody.innerHTML =
-      '<tr><td colspan="3" class="p-6 text-center text-on-surface-variant">' +
+      '<tr><td colspan="4" class="px-3 py-4 text-center text-on-surface-variant">' +
       EMPTY_MESSAGE +
       "</td></tr>";
     latestPriceEl.textContent = "Data unavailable";
@@ -302,6 +302,37 @@
     return matched;
   }
 
+  function setText(id, value) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.textContent = value || "";
+    }
+  }
+
+  function renderPriceInsights(rows, selectedObs, pricesPayload) {
+    var dateEl = document.getElementById("dash-price-date");
+    var sourceEl = document.getElementById("dash-price-source");
+    var statusEl = document.getElementById("dash-price-status");
+    if (dateEl) {
+      dateEl.textContent = (selectedObs && selectedObs.date) || "—";
+    }
+    if (sourceEl) {
+      sourceEl.textContent =
+        (selectedObs && selectedObs.source) ||
+        (pricesPayload && (pricesPayload.source_workbook || pricesPayload.provenance)) ||
+        "—";
+    }
+    if (statusEl) {
+      if (selectedObs && selectedObs.official) {
+        statusEl.textContent = "Verified";
+      } else if (selectedObs && selectedObs.data_status) {
+        statusEl.textContent = String(selectedObs.data_status).replace(/_/g, " ");
+      } else {
+        statusEl.textContent = "Observed";
+      }
+    }
+  }
+
   function setOutlookUnavailable() {
     if (latestPriceEl) {
       latestPriceEl.textContent = "Data unavailable";
@@ -315,6 +346,9 @@
     if (bestApmcPriceEl) {
       bestApmcPriceEl.textContent = "";
     }
+    setText("dash-price-date", "—");
+    setText("dash-price-source", "—");
+    setText("dash-price-status", "");
   }
 
   function updateOutlookSelection() {
@@ -361,7 +395,14 @@
 
   function applyStatusNotes(code, pricesPayload) {
     if (sourceNoteEl) {
-      sourceNoteEl.textContent = "";
+      var parts = [];
+      if (pricesPayload && pricesPayload.provenance) {
+        parts.push(pricesPayload.provenance);
+      }
+      if (pricesPayload && pricesPayload.unit) {
+        parts.push(pricesPayload.unit);
+      }
+      sourceNoteEl.textContent = parts.join(" · ");
     }
     if (tableNote) {
       tableNote.textContent = "";
@@ -427,16 +468,31 @@
       return;
     }
 
+    var latestByCentre = {};
     filteredObservations.forEach(function (obs) {
+      var name = obs.market_centre || "Unknown";
+      var prev = latestByCentre[name];
+      if (!prev || String(obs.date || "") > String(prev.date || "")) {
+        latestByCentre[name] = obs;
+      }
+    });
+    var comparisonRows = Object.keys(latestByCentre).map(function (name) {
+      return latestByCentre[name];
+    });
+    comparisonRows.sort(function (a, b) {
+      return numericPrice(b.price) - numericPrice(a.price);
+    });
+
+    comparisonRows.forEach(function (obs) {
       var tr = document.createElement("tr");
-      tr.className = "hover:bg-surface-container-low transition-colors border-b border-outline-variant/10";
+      tr.className = "border-b border-outline-variant/10";
 
       var tdName = document.createElement("td");
-      tdName.className = "p-4 text-on-background";
+      tdName.className = "px-3 py-2 text-on-background";
       tdName.textContent = obs.market_centre || "Unknown";
 
       var tdPrice = document.createElement("td");
-      tdPrice.className = "p-4 text-right text-on-surface-variant";
+      tdPrice.className = "px-3 py-2 text-right text-on-background font-semibold";
       if (Number.isFinite(obs.price) && obs.price > 0) {
         tdPrice.textContent = "₹" + Number(obs.price).toLocaleString("en-IN");
       } else {
@@ -444,12 +500,17 @@
       }
 
       var tdDate = document.createElement("td");
-      tdDate.className = "p-4 text-right text-on-surface-variant";
+      tdDate.className = "px-3 py-2 text-right text-on-surface-variant";
       tdDate.textContent = obs.date || "—";
+
+      var tdSource = document.createElement("td");
+      tdSource.className = "px-3 py-2 text-on-surface-variant";
+      tdSource.textContent = obs.source || "—";
 
       tr.appendChild(tdName);
       tr.appendChild(tdPrice);
       tr.appendChild(tdDate);
+      tr.appendChild(tdSource);
       tableBody.appendChild(tr);
     });
   }
@@ -487,6 +548,7 @@
       location +
       (selectedObs.date ? " · as of " + selectedObs.date : "");
     updateBestApmc(code, pricesPayload);
+    renderPriceInsights(filteredObservations, selectedObs, pricesPayload);
   }
 
   function hasVerifiedObservations(pricesPayload) {

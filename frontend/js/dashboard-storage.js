@@ -101,102 +101,78 @@
       listEl.appendChild(empty);
       return;
     }
-    rows.forEach(function (row, index) {
+    rows.forEach(function (row) {
       var li = document.createElement("li");
-      li.className = "bg-surface-container-low rounded-lg p-4 soft-inset";
+      li.className = "border border-outline-variant/40 rounded-xl p-3 bg-white";
 
       var title = document.createElement("p");
-      title.className = "text-body-md font-body-md text-on-background font-semibold";
-      title.textContent = index + 1 + ". " + (row.name || "Unnamed storage");
+      title.className = "text-sm font-semibold text-on-background";
+      title.textContent = row.name || "Unnamed storage";
       li.appendChild(title);
 
-      var badge = document.createElement("p");
-      badge.className = "text-label-sm font-label-sm text-primary mt-1";
-      if (row.match_type === "EXACT") {
-        badge.textContent = "EXACT FACILITY";
-      } else if (row.match_type === "DISTRICT_NEARBY") {
-        badge.textContent = "DISTRICT NEARBY";
-      } else {
-        badge.textContent = "NEARBY FACILITY";
+      var placeBits = [];
+      if (row.district) {
+        placeBits.push(row.district);
+      } else if (row.location) {
+        placeBits.push(row.location);
       }
-      li.appendChild(badge);
-
-      var loc = document.createElement("p");
-      loc.className = "text-label-sm font-label-sm text-on-surface-variant mt-1";
-      loc.textContent = "Location: " + (row.location || [row.district, row.state].filter(Boolean).join(", "));
-      li.appendChild(loc);
-
-      if (row.address) {
-        var address = document.createElement("p");
-        address.className = "text-body-md font-body-md text-on-surface-variant mt-1";
-        address.textContent = row.address;
-        li.appendChild(address);
+      if (row.distance_km !== null && row.distance_km !== undefined) {
+        placeBits.push(row.distance_km + " km");
       }
+      var place = document.createElement("p");
+      place.className = "text-xs text-on-surface-variant mt-0.5";
+      place.textContent = placeBits.join(" · ");
+      li.appendChild(place);
 
       var facts = document.createElement("p");
-      facts.className = "text-label-sm font-label-sm text-on-background mt-3";
-      var bits = [];
-      if (row.distance_km !== null && row.distance_km !== undefined) {
-        bits.push("Distance: " + row.distance_km + " km");
-      }
-      bits.push("Capacity: " + capacityText(row));
-      facts.textContent = bits.join(" · ");
+      facts.className = "text-xs text-on-background mt-2";
+      facts.textContent = "Capacity: " + capacityText(row);
       li.appendChild(facts);
 
-      var commodities = document.createElement("p");
-      commodities.className = "text-label-sm font-label-sm text-on-surface-variant mt-1";
-      commodities.textContent = "Commodity compatibility: " + (row.commodities_label || "Contact facility");
-      li.appendChild(commodities);
-
-      if (row.phone) {
-        var phone = document.createElement("p");
-        phone.className = "text-label-sm font-label-sm text-on-surface-variant mt-1";
-        phone.textContent = "Phone: " + row.phone;
-        li.appendChild(phone);
-      }
-
-      var availability = document.createElement("p");
-      availability.className = "text-label-sm font-label-sm text-on-surface-variant mt-1";
-      availability.textContent = "Availability: Contact facility";
-      li.appendChild(availability);
-
       var source = document.createElement("p");
-      source.className = "text-label-sm font-label-sm text-on-surface-variant mt-1";
-      source.textContent = "Source: " + (row.source_name || row.source_label || row.source || "Unknown");
+      source.className = "text-xs text-on-surface-variant mt-1";
+      var sourceBits = ["Source: " + (row.source_name || row.source_label || row.source || "Unknown")];
+      if (row.source_status) {
+        sourceBits.push(row.source_status);
+      }
+      if (row.last_verified_at) {
+        sourceBits.push(row.last_verified_at);
+      }
+      source.textContent = sourceBits.join(" · ");
       li.appendChild(source);
 
+      if (row.address || row.phone || row.commodities_label) {
+        var extra = document.createElement("p");
+        extra.className = "text-xs text-on-surface-variant mt-1";
+        extra.textContent = [row.address, row.phone ? "Phone: " + row.phone : "", row.commodities_label ? "Commodities: " + row.commodities_label : ""]
+          .filter(Boolean)
+          .join(" · ");
+        li.appendChild(extra);
+      }
+
+      var actions = document.createElement("div");
+      actions.className = "flex gap-3 mt-2";
       if (row.source_url) {
         var link = document.createElement("a");
-        link.className = "text-label-sm font-label-sm text-primary mt-1 inline-block";
+        link.className = "text-xs font-semibold text-primary";
         link.href = row.source_url;
         link.target = "_blank";
         link.rel = "noopener noreferrer";
-        link.textContent = "View source";
-        li.appendChild(link);
+        link.textContent = "View Source";
+        actions.appendChild(link);
       }
-
-      var verified = document.createElement("p");
-      verified.className = "text-label-sm font-label-sm text-on-surface-variant mt-1";
-      verified.textContent = "Source status: " + (row.source_status || "NHB project record");
-      li.appendChild(verified);
-
-      if (row.last_verified_at) {
-        var last = document.createElement("p");
-        last.className = "text-label-sm font-label-sm text-on-surface-variant mt-1";
-        last.textContent = "Last verified date: " + row.last_verified_at;
-        li.appendChild(last);
-      }
-
       if (row.directions_url) {
         var dir = document.createElement("a");
-        dir.className = "text-label-sm font-label-sm text-primary mt-2 inline-block";
+        dir.className = "text-xs font-semibold text-primary";
         dir.href = row.directions_url;
         dir.target = "_blank";
         dir.rel = "noopener noreferrer";
-        dir.textContent = "Get Directions";
-        li.appendChild(dir);
+        dir.textContent = "Directions";
+        actions.appendChild(dir);
       }
-
+      if (actions.childNodes.length) {
+        li.appendChild(actions);
+      }
       listEl.appendChild(li);
     });
   }

@@ -153,102 +153,121 @@
         }
       }
     </script>
-<style>.tactile-shadow-raised {
-    box-shadow: 0 8px 16px rgba(0, 69, 50, 0.08)
-    }
-.soft-pocket {
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05)
-    }
-.bg-texture {
-    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCh73ElvXqxA0sTC1LXe5FvqSPKM5_E8Z2qvklzYufmarfxOxmYHxf0JYPSJZ5UE5B6LDafbZCXCCoONAQfx5MRekGCCLdaZMcpaTs9jjKE_wFXFTUhVUY16olonhSlr8EZmAjQHuvKtc4w8WVFAmGC-1Z6FrGbRnrYpHP-wjX3-itovykI6RZUKTL_1zr0Woor0j-9oXOLxFcGgM6pR2rcsaqKObajoJuMFxAKnsiHU8rY6Kg89cxp);
+<style>
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+.auth-card {
+    box-shadow: 0 10px 30px rgba(0, 69, 50, 0.08);
+}
+.auth-input {
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.brand-panel {
+    background-color: #004532;
+    background-image: linear-gradient(160deg, rgba(0, 45, 32, 0.82), rgba(0, 69, 50, 0.55)), url("../assests/farmer.png");
     background-size: cover;
-    background-position: center
-    }</style>
+    background-position: center;
+}
+.auth-panel {
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    overscroll-behavior: contain;
+    container-type: size;
+}
+.auth-stage {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: max(2.5rem, calc((100cqh - 30.25rem) / 2)) 1rem 2.5rem;
+}
+</style>
 </head>
-<body class="h-full bg-background font-body-md text-on-background antialiased flex flex-col md:flex-row overflow-hidden">
-<!-- Suppressed navigation shells as this is a transactional/linear screen -->
-<!-- Left/Top Section: Branding & Atmospheric Background -->
-<div class="relative w-full md:w-1/2 h-48 md:h-full bg-texture bg-primary flex flex-col justify-end p-container-margin md:p-12 text-on-primary z-10" data-alt="A lush, detailed overhead view of an organic farm with terraced fields glowing in warm, early morning sunlight. The scene uses a rich palette of deep emerald greens, warm terracotta soil, and soft golden light, creating a premium 3D tactile aesthetic that feels both natural and technologically advanced. High-fidelity rendering with a subtle atmospheric mist overlay, emphasizing growth and intelligence.">
-<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-primary/30 mix-blend-multiply"></div>
-<div class="relative z-20 mt-auto">
-<h1 class="font-headline-xl text-headline-xl text-on-primary mb-2 shadow-sm drop-shadow-md">CropMandi AI</h1>
-<p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-md">Agricultural Intelligence tailored for your farm's growth and prosperity.</p>
+<body class="h-full overflow-hidden bg-background font-body-md text-on-background antialiased">
+<div class="h-full min-h-0 overflow-hidden flex flex-col md:flex-row">
+<aside class="brand-panel relative w-full shrink-0 md:w-[42%] lg:w-1/2 md:h-full overflow-hidden text-on-primary flex items-center">
+<div class="relative z-10 w-full px-6 py-8 md:px-8 lg:px-12 max-w-xl">
+<p class="text-sm font-medium tracking-wide text-primary-fixed mb-3">Coffee &amp; Pepper</p>
+<h1 class="font-headline-xl text-[32px] leading-tight md:text-[30px] lg:text-[40px] text-white mb-3">CropMandi AI</h1>
+<p class="text-base md:text-lg text-white/95 max-w-md mb-3">Know the price. Choose the right market. Sell smarter.</p>
+<p class="text-sm md:text-base text-primary-fixed-dim max-w-md mb-6">Verified market intelligence for Coffee &amp; Pepper growers.</p>
+<ul class="space-y-2 text-sm text-white/90">
+<li class="flex items-center gap-2"><span aria-hidden="true">✓</span> Verified Prices</li>
+<li class="flex items-center gap-2"><span aria-hidden="true">✓</span> Market Comparison</li>
+<li class="flex items-center gap-2"><span aria-hidden="true">✓</span> AI Insights</li>
+</ul>
 </div>
-</div>
-<!-- Right/Bottom Section: Authentication Canvas -->
-<div class="flex-1 w-full md:w-1/2 h-full overflow-y-auto bg-surface flex flex-col items-center justify-center p-container-margin relative z-20 -mt-6 md:mt-0 rounded-t-[32px] md:rounded-t-none">
-<!-- Language Selector -->
-<div class="absolute top-6 right-6 md:top-8 md:right-8 z-30">
-<button class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-variant transition-colors tactile-shadow-raised">
+</aside>
+<main class="auth-panel relative flex-1 min-h-0 w-full md:w-[58%] lg:w-1/2 bg-surface" id="auth-panel">
+<div class="absolute top-5 right-5 md:top-6 md:right-6 z-30">
+<button type="button" class="flex items-center gap-2 bg-white border border-outline-variant/40 px-3.5 py-2 rounded-full text-xs font-semibold text-on-surface-variant shadow-sm">
 <span class="material-symbols-outlined text-[18px]">language</span>
-                English
-                <span class="material-symbols-outlined text-[18px]">expand_more</span>
+English
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
 </button>
 </div>
-<!-- Forms Container -->
-<div class="w-full max-w-[420px] bg-surface-container-lowest rounded-[24px] p-8 tactile-shadow-raised relative" id="auth-container">
+<div class="auth-stage sm:px-6">
+<div class="w-full max-w-[440px] bg-white rounded-2xl p-6 sm:p-8 auth-card" id="auth-container">
 <p class="text-label-sm font-label-sm text-error mb-4 hidden" id="auth-message"></p>
-<!-- Tab Navigation (Login / Register) -->
-<div class="flex border-b border-outline-variant/30 mb-8 w-full">
-<button class="flex-1 pb-3 text-center font-headline-md text-body-lg font-bold text-primary border-b-2 border-primary transition-all" id="tab-login" onclick="switchTab('login')">
-                    Log In
-                </button>
-<button class="flex-1 pb-3 text-center font-headline-md text-body-lg text-on-surface-variant hover:text-primary transition-all" id="tab-register" onclick="switchTab('register')">
-                    Register
-                </button>
+<div class="grid grid-cols-2 gap-1 p-1 mb-6 bg-surface-container rounded-xl" role="tablist">
+<button class="py-2.5 rounded-lg text-sm font-semibold bg-white text-primary shadow-sm" id="tab-login" type="button" role="tab" aria-selected="true" onclick="switchTab('login')">Log In</button>
+<button class="py-2.5 rounded-lg text-sm font-medium text-on-surface-variant" id="tab-register" type="button" role="tab" aria-selected="false" onclick="switchTab('register')">Register</button>
 </div>
-<!-- Login Form -->
-<form class="space-y-6 block" id="form-login">
+<form class="space-y-5 block" id="form-login">
 <div class="space-y-4">
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="login-identifier">Phone Number or Email</label>
+<label class="block text-xs font-semibold text-on-surface-variant mb-1.5" for="login-identifier">Phone Number or Email</label>
 <div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">person</span>
-<input class="w-full bg-surface-container-low border border-transparent rounded-xl py-3 pl-12 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary soft-pocket transition-all outline-none placeholder-outline-variant" id="login-identifier" placeholder="Enter phone or email" type="text"/>
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">person</span>
+<input class="auth-input w-full bg-surface-container-low border border-outline-variant/40 rounded-xl py-3 pl-11 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder:text-outline" id="login-identifier" placeholder="Enter phone or email" type="text"/>
 </div>
 </div>
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="login-password">Password</label>
+<label class="block text-xs font-semibold text-on-surface-variant mb-1.5" for="login-password">Password</label>
 <div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">lock</span>
-<input class="w-full bg-surface-container-low border border-transparent rounded-xl py-3 pl-12 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary soft-pocket transition-all outline-none placeholder-outline-variant" id="login-password" placeholder="Enter password" type="password"/>
-</div>
-</div>
-</div>
-<div class="flex items-center justify-between">
-<label class="flex items-center gap-2 cursor-pointer">
-<input class="rounded text-primary focus:ring-primary bg-surface-container-low border-outline-variant/50 w-5 h-5" type="checkbox"/>
-<span class="font-body-md text-body-md text-on-surface-variant text-[14px]">Remember me</span>
-</label>
-<a class="font-label-sm text-label-sm text-primary hover:text-primary-container transition-colors" href="#">Forgot Password?</a>
-</div>
-<button type="submit" id="btn-access-dashboard" class="w-full bg-primary text-on-primary font-headline-md text-body-lg rounded-xl py-4 tactile-shadow-raised hover:bg-primary-container hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2">
-                    Access Dashboard
-                    <span class="material-symbols-outlined">arrow_forward</span>
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">lock</span>
+<input class="auth-input w-full bg-surface-container-low border border-outline-variant/40 rounded-xl py-3 pl-11 pr-11 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder:text-outline" id="login-password" placeholder="Enter password" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary" type="button" aria-label="Show password" onclick="togglePassword('login-password', this)">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
 </button>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between gap-3">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded text-primary focus:ring-primary bg-white border-outline-variant w-4 h-4" type="checkbox"/>
+<span class="text-sm text-on-surface-variant">Remember Me</span>
+</label>
+<a class="text-xs font-semibold text-primary hover:underline shrink-0" href="#">Forgot Password?</a>
+</div>
+<button type="submit" id="btn-access-dashboard" class="w-full bg-primary text-on-primary text-base font-semibold rounded-xl py-3.5 shadow-sm hover:bg-primary-container">Access Dashboard →</button>
+<p class="text-center text-xs text-on-surface-variant">🔒 Secure access</p>
+<p class="text-center text-sm text-on-surface-variant">New to CropMandi? <button class="text-primary font-semibold hover:underline" type="button" onclick="switchTab('register')">Create an account</button></p>
 </form>
-<!-- Register Form (Hidden by default) -->
-<form class="space-y-6 hidden" id="form-register">
+<form class="space-y-5 hidden" id="form-register">
 <div class="space-y-4">
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="reg-name">Full Name</label>
+<label class="block text-xs font-semibold text-on-surface-variant mb-1.5" for="reg-name">Full Name</label>
 <div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">badge</span>
-<input class="w-full bg-surface-container-low border border-transparent rounded-xl py-3 pl-12 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary soft-pocket transition-all outline-none placeholder-outline-variant" id="reg-name" placeholder="e.g. Ramesh Kumar" type="text"/>
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">badge</span>
+<input class="auth-input w-full bg-surface-container-low border border-outline-variant/40 rounded-xl py-3 pl-11 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder:text-outline" id="reg-name" placeholder="e.g. Ramesh Kumar" type="text"/>
 </div>
 </div>
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="reg-location">Farm Location</label>
+<label class="block text-xs font-semibold text-on-surface-variant mb-1.5" for="reg-location">Farm Location</label>
 <div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">location_on</span>
-<input class="w-full bg-surface-container-low border border-transparent rounded-xl py-3 pl-12 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary soft-pocket transition-all outline-none placeholder-outline-variant" id="reg-location" placeholder="Village, District" type="text"/>
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">location_on</span>
+<input class="auth-input w-full bg-surface-container-low border border-outline-variant/40 rounded-xl py-3 pl-11 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder:text-outline" id="reg-location" placeholder="Village, District" type="text"/>
 </div>
 </div>
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="reg-crop">Primary Crop</label>
+<label class="block text-xs font-semibold text-on-surface-variant mb-1.5" for="reg-crop">Primary Crop</label>
 <div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">grass</span>
-<select class="w-full bg-surface-container-low border border-transparent rounded-xl py-3 pl-12 pr-10 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary soft-pocket transition-all outline-none appearance-none" id="reg-crop">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">grass</span>
+<select class="auth-input w-full bg-surface-container-low border border-outline-variant/40 rounded-xl py-3 pl-11 pr-10 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none" id="reg-crop">
 <option disabled="" selected="" value="">Select main crop</option>
 <option value="wheat">Wheat</option>
 <option value="rice">Rice (Paddy)</option>
@@ -256,71 +275,80 @@
 <option value="sugarcane">Sugarcane</option>
 <option value="other">Other</option>
 </select>
-<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px]">expand_more</span>
 </div>
 </div>
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="reg-phone">Mobile Number</label>
+<label class="block text-xs font-semibold text-on-surface-variant mb-1.5" for="reg-phone">Mobile Number</label>
 <div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">call</span>
-<input class="w-full bg-surface-container-low border border-transparent rounded-xl py-3 pl-12 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary soft-pocket transition-all outline-none placeholder-outline-variant" id="reg-phone" placeholder="+91" type="tel"/>
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">call</span>
+<input class="auth-input w-full bg-surface-container-low border border-outline-variant/40 rounded-xl py-3 pl-11 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder:text-outline" id="reg-phone" placeholder="+91" type="tel"/>
 </div>
 </div>
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="reg-email">Email (optional)</label>
+<label class="block text-xs font-semibold text-on-surface-variant mb-1.5" for="reg-email">Email (optional)</label>
 <div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">mail</span>
-<input class="w-full bg-surface-container-low border border-transparent rounded-xl py-3 pl-12 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary soft-pocket transition-all outline-none placeholder-outline-variant" id="reg-email" placeholder="Enter email" type="email"/>
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">mail</span>
+<input class="auth-input w-full bg-surface-container-low border border-outline-variant/40 rounded-xl py-3 pl-11 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder:text-outline" id="reg-email" placeholder="Enter email" type="email"/>
 </div>
 </div>
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="reg-password">Password</label>
+<label class="block text-xs font-semibold text-on-surface-variant mb-1.5" for="reg-password">Password</label>
 <div class="relative">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">lock</span>
-<input class="w-full bg-surface-container-low border border-transparent rounded-xl py-3 pl-12 pr-4 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary soft-pocket transition-all outline-none placeholder-outline-variant" id="reg-password" placeholder="Create a password" type="password"/>
-</div>
-</div>
-</div>
-<button class="w-full bg-primary text-on-primary font-headline-md text-body-lg rounded-xl py-4 tactile-shadow-raised hover:bg-primary-container hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2" type="submit" id="btn-create-account">
-                    Create Account
-                    <span class="material-symbols-outlined">person_add</span>
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">lock</span>
+<input class="auth-input w-full bg-surface-container-low border border-outline-variant/40 rounded-xl py-3 pl-11 pr-11 text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder:text-outline" id="reg-password" placeholder="Create a password" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary" type="button" aria-label="Show password" onclick="togglePassword('reg-password', this)">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
 </button>
-<p class="text-center font-label-sm text-label-sm text-on-surface-variant mt-4">
-                    By registering, you agree to our <a class="text-primary hover:underline" href="#">Terms &amp; Privacy</a>.
-                </p>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary text-base font-semibold rounded-xl py-3.5 shadow-sm hover:bg-primary-container" type="submit" id="btn-create-account">Create Farmer Account →</button>
+<p class="text-center text-xs text-on-surface-variant">🔒 Secure access</p>
+<p class="text-center text-xs text-on-surface-variant">By registering, you agree to our <a class="text-primary hover:underline" href="#">Terms &amp; Privacy</a>.</p>
+<p class="text-center text-sm text-on-surface-variant">Already have an account? <button class="text-primary font-semibold hover:underline" type="button" onclick="switchTab('login')">Log in</button></p>
 </form>
 </div>
 </div>
+</main>
+</div>
 <script>
+        function setTabState(tab, active) {
+            tab.classList.toggle('bg-white', active);
+            tab.classList.toggle('text-primary', active);
+            tab.classList.toggle('font-semibold', active);
+            tab.classList.toggle('shadow-sm', active);
+            tab.classList.toggle('text-on-surface-variant', !active);
+            tab.classList.toggle('font-medium', !active);
+            tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        }
+
         function switchTab(tab) {
             const loginForm = document.getElementById('form-login');
             const registerForm = document.getElementById('form-register');
             const loginTab = document.getElementById('tab-login');
             const registerTab = document.getElementById('tab-register');
+            const showLogin = tab === 'login';
 
-            if (tab === 'login') {
-                loginForm.classList.remove('hidden');
-                loginForm.classList.add('block');
-                registerForm.classList.add('hidden');
-                registerForm.classList.remove('block');
-
-                loginTab.classList.add('font-bold', 'text-primary', 'border-b-2', 'border-primary');
-                loginTab.classList.remove('text-on-surface-variant');
-                
-                registerTab.classList.remove('font-bold', 'text-primary', 'border-b-2', 'border-primary');
-                registerTab.classList.add('text-on-surface-variant');
-            } else {
-                registerForm.classList.remove('hidden');
-                registerForm.classList.add('block');
-                loginForm.classList.add('hidden');
-                loginForm.classList.remove('block');
-
-                registerTab.classList.add('font-bold', 'text-primary', 'border-b-2', 'border-primary');
-                registerTab.classList.remove('text-on-surface-variant');
-                
-                loginTab.classList.remove('font-bold', 'text-primary', 'border-b-2', 'border-primary');
-                loginTab.classList.add('text-on-surface-variant');
+            loginForm.classList.toggle('hidden', !showLogin);
+            loginForm.classList.toggle('block', showLogin);
+            registerForm.classList.toggle('hidden', showLogin);
+            registerForm.classList.toggle('block', !showLogin);
+            setTabState(loginTab, showLogin);
+            setTabState(registerTab, !showLogin);
+            const panel = document.getElementById('auth-panel');
+            if (panel) {
+                panel.scrollTop = 0;
             }
+        }
+
+        function togglePassword(inputId, button) {
+            const input = document.getElementById(inputId);
+            const icon = button.querySelector('.material-symbols-outlined');
+            const show = input.type === 'password';
+            input.type = show ? 'text' : 'password';
+            icon.textContent = show ? 'visibility_off' : 'visibility';
+            button.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
         }
     </script>
 <script src="../js/api.js"></script>
